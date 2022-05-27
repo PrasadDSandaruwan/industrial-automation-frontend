@@ -22,16 +22,7 @@ export class AppRoutes extends Component {
         <Switch>
           <ProtectedRouteAdmin path="/machines" component={Machines} />
           <ProtectedRouteAdmin path="/alarms" component={Alarms} />
-          <ProtectedRouteAdmin
-            path="/notifications"
-            component={Notifications}
-          />
-          <ProtectedRouteAdmin
-            path="/editnotifications"
-            component={EditNotifications}
-          />
-          <ProtectedRouteAdmin path="/addalarm" component={AddAlarm} />
-          <ProtectedRouteAdmin path="/editalarm" component={EditAlarm} />
+
           <ProtectedRouteAdmin
             path="/usermanagement"
             component={UserManagement}
@@ -42,6 +33,15 @@ export class AppRoutes extends Component {
           <ProtectedRoute path="/changepassword" component={ChangePassword} />
           <ProtectedRoute path="/dasboard" component={Dashboard} />
           <ProtectedRoute path="/logout" component={Logout} />
+
+          <ProtectedRouteAdmin
+            path="/notifications"
+            component={Notifications}
+          />
+          <ProtectedRouteAdmin
+            path="/editnotifications"
+            component={EditNotifications}
+          />
 
           <Route path="/">
             <Redirect to="/signin"></Redirect>
