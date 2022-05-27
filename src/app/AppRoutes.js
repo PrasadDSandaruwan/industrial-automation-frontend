@@ -1,15 +1,19 @@
-import React, { Component, Suspense, lazy } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import ProtectedRoute from './components/common/protectedRoute'
-import ProtectedRouteAdmin from './components/common/protectedRouteAdmin'
-const Dashboard = lazy(() => import('./dashboard/Dashboard'))
-const Machines = lazy(() => import('./pages/Machines'))
-const Alarms = lazy(() => import('./pages/Alarms'))
-const UserManagement = lazy(() => import('./pages/UserManagement'))
-const Profile = lazy(() => import('./pages/Profile'))
-const Signin = lazy(() => import('./pages/Signin'))
-const ChangePassword = lazy(() => import('./pages/ChangePassword'))
-const Logout = lazy(() => import('../app/components/common/logout'))
+import React, { Component, Suspense, lazy } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import ProtectedRoute from "./components/common/protectedRoute";
+import ProtectedRouteAdmin from "./components/common/protectedRouteAdmin";
+const Dashboard = lazy(() => import("./dashboard/Dashboard"));
+const Machines = lazy(() => import("./pages/Machines"));
+const AddAlarm = lazy(() => import("./pages/AddAlarm"));
+const EditAlarm = lazy(() => import("./pages/EditAlarm"));
+const Alarms = lazy(() => import("./pages/Alarms"));
+const Notifications = lazy(() => import("./pages/Notifications"));
+const EditNotifications = lazy(() => import("./pages/EditNotifications"));
+const UserManagement = lazy(() => import("./pages/UserManagement"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Signin = lazy(() => import("./pages/Signin"));
+const ChangePassword = lazy(() => import("./pages/ChangePassword"));
+const Logout = lazy(() => import("../app/components/common/logout"));
 
 export class AppRoutes extends Component {
   render() {
@@ -18,6 +22,16 @@ export class AppRoutes extends Component {
         <Switch>
           <ProtectedRouteAdmin path="/machines" component={Machines} />
           <ProtectedRouteAdmin path="/alarms" component={Alarms} />
+          <ProtectedRouteAdmin
+            path="/notifications"
+            component={Notifications}
+          />
+          <ProtectedRouteAdmin
+            path="/editnotifications"
+            component={EditNotifications}
+          />
+          <ProtectedRouteAdmin path="/addalarm" component={AddAlarm} />
+          <ProtectedRouteAdmin path="/editalarm" component={EditAlarm} />
           <ProtectedRouteAdmin
             path="/usermanagement"
             component={UserManagement}
@@ -34,8 +48,8 @@ export class AppRoutes extends Component {
           </Route>
         </Switch>
       </Suspense>
-    )
+    );
   }
 }
 
-export default AppRoutes
+export default AppRoutes;

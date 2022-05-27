@@ -1,26 +1,26 @@
-import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import { Dropdown } from 'react-bootstrap'
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
 
 export class Header extends Component {
   closeMenu(e) {
-    e.target.closest('.dropdown').classList.remove('show')
-    e.target.closest('.dropdown .dropdown-menu').classList.remove('show')
+    e.target.closest(".dropdown").classList.remove("show");
+    e.target.closest(".dropdown .dropdown-menu").classList.remove("show");
   }
 
   toggleHeaderMenu(e) {
-    e.preventDefault()
-    document.querySelector('body').classList.toggle('az-header-menu-show')
+    e.preventDefault();
+    document.querySelector("body").classList.toggle("az-header-menu-show");
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
-      document.querySelector('body').classList.remove('az-header-menu-show')
+      document.querySelector("body").classList.remove("az-header-menu-show");
     }
   }
 
   render() {
-    const { user } = this.props
+    const { user } = this.props;
     return (
       <div>
         <div className="az-header">
@@ -54,9 +54,9 @@ export class Header extends Component {
               <ul className="nav">
                 <li
                   className={
-                    this.isPathActive('/dashboard')
-                      ? 'nav-item active'
-                      : 'nav-item'
+                    this.isPathActive("/dashboard")
+                      ? "nav-item active"
+                      : "nav-item"
                   }
                 >
                   <Link to="/dashboard" className="nav-link">
@@ -64,12 +64,12 @@ export class Header extends Component {
                   </Link>
                 </li>
 
-                {user && user.authorities[0] === 'ADMIN' && (
+                {user && user.authorities[0] === "ADMIN" && (
                   <li
                     className={
-                      this.isPathActive('/machines')
-                        ? 'nav-item active'
-                        : 'nav-item'
+                      this.isPathActive("/machines")
+                        ? "nav-item active"
+                        : "nav-item"
                     }
                   >
                     <Link to="/machines" className="nav-link">
@@ -78,12 +78,12 @@ export class Header extends Component {
                   </li>
                 )}
 
-                {user && user.authorities[0] === 'ADMIN' && (
+                {user && user.authorities[0] === "ADMIN" && (
                   <li
                     className={
-                      this.isPathActive('/alarms')
-                        ? 'nav-item active'
-                        : 'nav-item'
+                      this.isPathActive("/alarms")
+                        ? "nav-item active"
+                        : "nav-item"
                     }
                   >
                     <Link to="/alarms" className="nav-link">
@@ -92,12 +92,12 @@ export class Header extends Component {
                   </li>
                 )}
 
-                {user && user.authorities[0] === 'ADMIN' && (
+                {user && user.authorities[0] === "ADMIN" && (
                   <li
                     className={
-                      this.isPathActive('/usermanagement')
-                        ? 'nav-item active'
-                        : 'nav-item'
+                      this.isPathActive("/usermanagement")
+                        ? "nav-item active"
+                        : "nav-item"
                     }
                   >
                     <Link to="/usermanagement" className="nav-link">
@@ -105,11 +105,25 @@ export class Header extends Component {
                     </Link>
                   </li>
                 )}
+
+                {user && user.authorities[0] === "ADMIN" && (
+                  <li
+                    className={
+                      this.isPathActive("/notifications")
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
+                    <Link to="/notifications" className="nav-link">
+                      Notifications
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
             <div className="az-header-right">
               <Dropdown className="az-header-notification">
-                <Dropdown.Toggle as={'a'} className="new">
+                <Dropdown.Toggle as={"a"} className="new">
                   <i className="typcn typcn-bell"></i>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -130,7 +144,7 @@ export class Header extends Component {
                     <div className="media">
                       <div className="az-img-user">
                         <img
-                          src={require('../../assets/images/img5.jpg')}
+                          src={require("../../assets/images/img5.jpg")}
                           alt=""
                         ></img>
                       </div>
@@ -150,9 +164,9 @@ export class Header extends Component {
               </Dropdown>
 
               <Dropdown className="az-profile-menu">
-                <Dropdown.Toggle as={'a'} className="az-img-user">
+                <Dropdown.Toggle as={"a"} className="az-img-user">
                   <img
-                    src={require('../../assets/images/img1.jpg')}
+                    src={require("../../assets/images/img1.jpg")}
                     alt=""
                   ></img>
                 </Dropdown.Toggle>
@@ -169,7 +183,7 @@ export class Header extends Component {
                   <div className="az-header-profile">
                     <div className="az-img-user">
                       <img
-                        src={require('../../assets/images/img1.jpg')}
+                        src={require("../../assets/images/img1.jpg")}
                         alt=""
                       ></img>
                     </div>
@@ -192,12 +206,12 @@ export class Header extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   isPathActive(path) {
-    return this.props.location.pathname.startsWith(path)
+    return this.props.location.pathname.startsWith(path);
   }
 }
 
-export default withRouter(Header)
+export default withRouter(Header);
