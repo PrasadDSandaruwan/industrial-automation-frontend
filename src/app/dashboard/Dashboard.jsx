@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import {Line, Bar, Pie } from 'react-chartjs-2';
 
 export class Dashboard extends Component { 
-  websiteAudienceChartData = {
+  RateOfProduction = {
     labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49',
     '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', '85', '86', '87', '88', '89', '90', '91', '92', '93', '94', '95', '96', '97', '98', '99', 
     '100', '101', '102', '103', '104', '105', '106', '107', '108', '109', '110', '111', '112', '113', '114', '115', '116', '117', '118', '119', '120', '121', '122', '123', '124', '125', '126', '127', '128', '129', '130', '131', '132', '133', '134', '135', '136', '137', '138', '139', '140', '141', '142', '143', '144', '145', '146', '147', '148', '149'],
     datasets: [{
-      label: 'This week',
       data: [36.57, 38.9, 42.3, 41.8, 37.4, 32.5, 28.1, 24.7, 23.4, 20.4, 16.5, 12.1, 9.2, 5.1, 9.6, 10.8, 13.2, 18.2, 13.9, 18.7, 13.7, 11.3, 13.7, 15.8, 12.9, 17.5, 21.9, 18.2, 14.3, 18.2, 14.8, 13.01, 14.5, 15.4, 16.6, 19.4, 14.5, 17.7, 13.8, 9.4, 11.9, 9.7, 6.1, 1.4, 2.3, 2.3, 4.5, 3.7, 5.7, 5.08, 1.9, 8.2,
         7.9, 5.02, 2.8, 6.8, 6.2, 9.8, 9.3, 11.9, 10, 9, 6, 4.5, 2.7, 4.3, 3.6, 4.2, 2, 1.4, 3.7, 1.5, 5.7, 4.9, 1, 4.7, 6.3, 4.2, 5.1, 5.2, 3.8, 8.2, 7.2, 6.5, 1.7, 11.4, 10.5, 3.8, 4.7, 8.5, 10.2, 11, 15.6, 19.7, 18.1, 13.5, 12, 7.5, 3.7, 9.7, 9.2, 13.4, 18.4, 22.4, 18.7, 15.2, 14.5, 14.4, 12, 13.7, 13.3, 15.4,
          15.8, 17.7, 14.3, 10.6, 12.7, 14.7, 18.6, 22.9, 18, 22.8, 23.8, 27.1, 24.7, 20, 22.7, 20.9, 16.6, 15.1, 13.1, 10.7, 11.4, 13.1, 10.1, 9.2, 9.2, 10.3, 15.2, 12.5, 14, 18.2, 16.3, 17.7, 18.9, 15.3, 18.1, 16.3, 14.8, 10 ],
@@ -15,31 +14,74 @@ export class Dashboard extends Component {
       fill: true,
       backgroundColor: ['rgba(255, 255, 255, 1)'],
       borderColor: ['rgb(0, 123, 255)']
-    },{
-      label: 'Current week',
-      data: [53, 50.3, 49.4, 47.7, 49, 50.6, 48.7, 48.8, 53.5, 52.9, 49, 50.2, 48.3, 44.8, 40.7, 41.2, 45.6, 44.6, 41.3, 38.2, 39.6, 41, 39.4, 35.6, 38.5, 38.5, 40.6, 38.7, 42.9, 46.3, 43.5, 40.6, 36.5, 31.7, 28.9, 29.6, 29.5, 33.1, 37, 35.8, 37.6, 39.6, 39, 34.1, 37.4, 39.2, 38.4, 37.7, 40.1, 35.8, 31.5, 31.8,
-        30.5, 25.7, 28.2, 28.4, 30, 32.1, 32.9, 37.6, 35.2, 39.1, 41.3, 41.4, 43.7, 39.4, 39.2, 43.8, 42.4, 43.6, 38.7 , 43.5, 41.8, 44.8, 46.1, 47.6, 49, 46.4, 51.2, 50.1, 53.6, 56, 52.7, 56.6, 60.2, 58.3, 56.5, 55.7, 54.7, 54.2, 58.6, 57, 60.5, 57.6, 56.1, 55.1, 54.3, 52.3, 54.5, 54.1, 51.9, 51.1, 46.3, 48.3,
-         45.8, 48.2, 43.3, 45.8, 43.4, 41.3, 40.9, 38.4, 40.1, 44.8, 44, 41.4, 37.8, 39.2, 35.2, 32.1, 35.6, 38, 37.9, 38.7, 37.4, 37.5, 33.1, 35, 33.1, 31.8, 29.1, 31.9, 34.3, 32.9, 33.1, 37.1, 32.6, 36.9, 35.9, 38.1, 42.5, 41.5, 45.5, 46.3, 45.7, 45.4, 42.5, 44.4, 39.7, 44.7],
-      borderWidth: 2,
-      fill: true,
-      backgroundColor: ['rgba(86, 11, 208, .05)'],
-      borderColor: ['rgb(86, 11, 208)'],
     }]
   };
 
-  websiteAudienceChartOptions = {
+  Ingredient1 = {
+    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51'],
+    datasets: [{
+      data: [27.2, 29.9, 29.6, 25.7, 25.9, 29.3, 31.1, 27.9, 28.4, 25.4, 23.2, 18.2, 14, 12.7, 11, 13.7, 9.7, 12.6, 10.9, 12.7, 13.8, 12.9, 13.8, 10.2, 5.8, 7.6, 8.8, 5.6, 5.6, 6.3, 4.2, 3.6, 5.4, 6.5, 8.1, 10.9, 7.6, 9.7, 10.9, 9.5, 5.4, 4.9, .7, 2.3, 5.5, 10, 10.6, 8.3, 8.4, 8.5, 5.8 ],
+      borderWidth: 2,
+      fill: true,
+      backgroundColor: ['rgba(0, 204, 212, .2)'],
+      borderColor: ['rgb(0, 204, 212)']
+    }]
+  };
+
+  MachineTemperatures = {
+    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49',
+    '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', '85', '86', '87', '88', '89', '90', '91', '92', '93', '94', '95', '96', '97', '98', '99', 
+    '100', '101', '102', '103', '104', '105', '106', '107', '108', '109', '110', '111', '112', '113', '114', '115', '116', '117', '118', '119', '120', '121', '122', '123', '124', '125', '126', '127', '128', '129', '130', '131', '132', '133', '134', '135', '136', '137', '138', '139', '140', '141', '142', '143', '144', '145', '146', '147', '148', '149'],
+    datasets: [{
+      data: [36.57, 38.9, 42.3, 41.8, 37.4, 32.5, 28.1, 24.7, 23.4, 20.4, 16.5, 12.1, 9.2, 5.1, 9.6, 10.8, 13.2, 18.2, 13.9, 18.7, 13.7, 11.3, 13.7, 15.8, 12.9, 17.5, 21.9, 18.2, 14.3, 18.2, 14.8, 13.01, 14.5, 15.4, 16.6, 19.4, 14.5, 17.7, 13.8, 9.4, 11.9, 9.7, 6.1, 1.4, 2.3, 2.3, 4.5, 3.7, 5.7, 5.08, 1.9, 8.2,
+        7.9, 5.02, 2.8, 6.8, 6.2, 9.8, 9.3, 11.9, 10, 9, 6, 4.5, 2.7, 4.3, 3.6, 4.2, 2, 1.4, 3.7, 1.5, 5.7, 4.9, 1, 4.7, 6.3, 4.2, 5.1, 5.2, 3.8, 8.2, 7.2, 6.5, 1.7, 11.4, 10.5, 3.8, 4.7, 8.5, 10.2, 11, 15.6, 19.7, 18.1, 13.5, 12, 7.5, 3.7, 9.7, 9.2, 13.4, 18.4, 22.4, 18.7, 15.2, 14.5, 14.4, 12, 13.7, 13.3, 15.4,
+         15.8, 17.7, 14.3, 10.6, 12.7, 14.7, 18.6, 22.9, 18, 22.8, 23.8, 27.1, 24.7, 20, 22.7, 20.9, 16.6, 15.1, 13.1, 10.7, 11.4, 13.1, 10.1, 9.2, 9.2, 10.3, 15.2, 12.5, 14, 18.2, 16.3, 17.7, 18.9, 15.3, 18.1, 16.3, 14.8, 10 ],
+      borderWidth: 2,
+      fill: true,
+      backgroundColor: ['rgba(255, 255, 255, 1)'],
+      borderColor: ['rgb(0, 123, 255)']
+    }],
+    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49',
+    '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', '85', '86', '87', '88', '89', '90', '91', '92', '93', '94', '95', '96', '97', '98', '99', 
+    '100', '101', '102', '103', '104', '105', '106', '107', '108', '109', '110', '111', '112', '113', '114', '115', '116', '117', '118', '119', '120', '121', '122', '123', '124', '125', '126', '127', '128', '129', '130', '131', '132', '133', '134', '135', '136', '137', '138', '139', '140', '141', '142', '143', '144', '145', '146', '147', '148', '149'],
+    datasets: [{
+      data: [36.57, 38.9, 42.3, 41.8, 37.4, 32.5, 28.1, 24.7, 23.4, 20.4, 16.5, 12.1, 9.2, 5.1, 9.6, 10.8, 13.2, 18.2, 13.9, 18.7, 13.7, 11.3, 13.7, 15.8, 12.9, 17.5, 21.9, 18.2, 14.3, 18.2, 14.8, 13.01, 14.5, 15.4, 16.6, 19.4, 14.5, 17.7, 13.8, 9.4, 11.9, 9.7, 6.1, 1.4, 2.3, 2.3, 4.5, 3.7, 5.7, 5.08, 1.9, 8.2,
+        7.9, 5.02, 2.8, 6.8, 6.2, 9.8, 9.3, 11.9, 10, 9, 6, 4.5, 2.7, 4.3, 3.6, 4.2, 2, 1.4, 3.7, 1.5, 5.7, 4.9, 1, 4.7, 6.3, 4.2, 5.1, 5.2, 3.8, 8.2, 7.2, 6.5, 1.7, 11.4, 10.5, 3.8, 4.7, 8.5, 10.2, 11, 15.6, 19.7, 18.1, 13.5, 12, 7.5, 3.7, 9.7, 9.2, 13.4, 18.4, 22.4, 18.7, 15.2, 14.5, 14.4, 12, 13.7, 13.3, 15.4,
+         15.8, 17.7, 14.3, 10.6, 12.7, 14.7, 18.6, 22.9, 18, 22.8, 23.8, 27.1, 24.7, 20, 22.7, 20.9, 16.6, 15.1, 13.1, 10.7, 11.4, 13.1, 10.1, 9.2, 9.2, 10.3, 15.2, 12.5, 14, 18.2, 16.3, 17.7, 18.9, 15.3, 18.1, 16.3, 14.8, 10 ],
+      borderWidth: 2,
+      fill: true,
+      backgroundColor: ['rgba(255, 255, 255, 1)'],
+      borderColor: ['rgb(0, 123, 255)']
+    }],
+    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49',
+    '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', '85', '86', '87', '88', '89', '90', '91', '92', '93', '94', '95', '96', '97', '98', '99', 
+    '100', '101', '102', '103', '104', '105', '106', '107', '108', '109', '110', '111', '112', '113', '114', '115', '116', '117', '118', '119', '120', '121', '122', '123', '124', '125', '126', '127', '128', '129', '130', '131', '132', '133', '134', '135', '136', '137', '138', '139', '140', '141', '142', '143', '144', '145', '146', '147', '148', '149'],
+    datasets: [{
+      data: [36.57, 38.9, 42.3, 41.8, 37.4, 32.5, 28.1, 24.7, 23.4, 20.4, 16.5, 12.1, 9.2, 5.1, 9.6, 10.8, 13.2, 18.2, 13.9, 18.7, 13.7, 11.3, 13.7, 15.8, 12.9, 17.5, 21.9, 18.2, 14.3, 18.2, 14.8, 13.01, 14.5, 15.4, 16.6, 19.4, 14.5, 17.7, 13.8, 9.4, 11.9, 9.7, 6.1, 1.4, 2.3, 2.3, 4.5, 3.7, 5.7, 5.08, 1.9, 8.2,
+        7.9, 5.02, 2.8, 6.8, 6.2, 9.8, 9.3, 11.9, 10, 9, 6, 4.5, 2.7, 4.3, 3.6, 4.2, 2, 1.4, 3.7, 1.5, 5.7, 4.9, 1, 4.7, 6.3, 4.2, 5.1, 5.2, 3.8, 8.2, 7.2, 6.5, 1.7, 11.4, 10.5, 3.8, 4.7, 8.5, 10.2, 11, 15.6, 19.7, 18.1, 13.5, 12, 7.5, 3.7, 9.7, 9.2, 13.4, 18.4, 22.4, 18.7, 15.2, 14.5, 14.4, 12, 13.7, 13.3, 15.4,
+         15.8, 17.7, 14.3, 10.6, 12.7, 14.7, 18.6, 22.9, 18, 22.8, 23.8, 27.1, 24.7, 20, 22.7, 20.9, 16.6, 15.1, 13.1, 10.7, 11.4, 13.1, 10.1, 9.2, 9.2, 10.3, 15.2, 12.5, 14, 18.2, 16.3, 17.7, 18.9, 15.3, 18.1, 16.3, 14.8, 10 ],
+      borderWidth: 2,
+      fill: true,
+      backgroundColor: ['rgba(255, 255, 255, 1)'],
+      borderColor: ['rgb(0, 123, 255)']
+    }]
+
+  };
+
+
+  chartType1 = {
     scales: {
       yAxes: [{
         display: true,
         gridLines: {
-          drawBorder: false,
+          drawBorder: true,
           display: true,
-          drawTicks: false,
+          drawTicks: true,
           color: '#eef0fa',
           zeroLineColor: 'rgba(90, 113, 208, 0)',
         },
         ticks: {
-          display: false,
+          display: true,
           beginAtZero: true,
           min: 0,
           max: 100,
@@ -48,12 +90,12 @@ export class Dashboard extends Component {
         }
       }],
       xAxes: [{
-        display: false,
+        display: true,
         position: 'bottom',
         gridLines: {
-          drawBorder: false,
-          display: false,
-          drawTicks: false,
+          drawBorder: true,
+          display: true,
+          drawTicks: true,
         },
         ticks: {
           beginAtZero: true,
@@ -64,7 +106,7 @@ export class Dashboard extends Component {
       }],
     },
     legend: {
-      display: false,
+      display: true,
     },
     elements: {
       point: {
@@ -79,28 +121,19 @@ export class Dashboard extends Component {
     },
   };
 
-  bounceRateChartData = {
-    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51'],
-    datasets: [{
-      data: [27.2, 29.9, 29.6, 25.7, 25.9, 29.3, 31.1, 27.9, 28.4, 25.4, 23.2, 18.2, 14, 12.7, 11, 13.7, 9.7, 12.6, 10.9, 12.7, 13.8, 12.9, 13.8, 10.2, 5.8, 7.6, 8.8, 5.6, 5.6, 6.3, 4.2, 3.6, 5.4, 6.5, 8.1, 10.9, 7.6, 9.7, 10.9, 9.5, 5.4, 4.9, .7, 2.3, 5.5, 10, 10.6, 8.3, 8.4, 8.5, 5.8 ],
-      borderWidth: 2,
-      fill: true,
-      backgroundColor: ['rgba(0, 204, 212, .2)'],
-      borderColor: ['rgb(0, 204, 212)']
-    }]
-  };
 
-  bounceRateChartOptions = {
+
+  ChartType2 = {
     scales: {
       yAxes: [{
-        display: false,
+        display: true,
         gridLines: {
-          drawBorder: false,
+          drawBorder: true,
           display: true,
-          drawTicks: false,
+          drawTicks: true,
         },
         ticks: {
-          display: false,
+          display: true,
           beginAtZero: true,
           min: 0,
           max: 40,
@@ -108,18 +141,18 @@ export class Dashboard extends Component {
         }
       }],
       xAxes: [{
-        display: false,
+        display: true,
         position: 'bottom',
         gridLines: {
-          drawBorder: false,
-          display: false,
-          drawTicks: false,
+          drawBorder: true,
+          display: true,
+          drawTicks: true,
         },
         ticks: {
           beginAtZero: true,
           stepSize: 10,
           fontColor: "#a7afb7",
-          padding: 10,
+          padding: 5,
         }
       }],
     },
@@ -411,58 +444,42 @@ export class Dashboard extends Component {
                 <a className="nav-link" data-toggle="tab" href="#/">Demographics</a>
                 <a className="nav-link" data-toggle="tab" href="#/">More</a>
               </nav>
-
-              <nav className="nav">
-                <a className="nav-link" href="#/"><i className="far fa-save"></i> Save Report</a>
-                <a className="nav-link" href="#/"><i className="far fa-file-pdf"></i> Export to PDF</a>
-                <a className="nav-link" href="#/"><i className="far fa-envelope"></i>Send to Email</a>
-                <a className="nav-link" href="#/"><i className="fas fa-ellipsis-h"></i></a>
-              </nav>
             </div>
 
             <div className="row row-sm mg-b-20">
-              <div className="col-lg-7 ht-lg-100p">
+              <div className="col-lg-6 ht-lg-100p">
                 <div className="card card-dashboard-one">
                   <div className="card-header">
                     <div>
-                      <h6 className="card-title">Website Audience Metrics</h6>
-                      <p className="card-text">Audience to which the users belonged while on the current date range.</p>
-                    </div>
-                    <div className="btn-group">
-                      <button className="btn active">Day</button>
-                      <button className="btn">Week</button>
-                      <button className="btn">Month</button>
+                      <h5 >Production Rate</h5>
+                      {/* <p className="card-text">Audience to which the users belonged while on the current date range.</p> */}
                     </div>
                   </div>{/* card-header */}
                   <div className="card-body">
-                    <div className="card-body-top">
-                      <div>
-                        <label className="mg-b-0">Users</label>
-                        <h2>13,956</h2>
-                      </div>
-                      <div>
-                        <label className="mg-b-0">Bounce Rate</label>
-                        <h2>33.50%</h2>
-                      </div>
-                      <div>
-                        <label className="mg-b-0">Page Views</label>
-                        <h2>83,123</h2>
-                      </div>
-                      <div>
-                        <label className="mg-b-0">Sessions</label>
-                        <h2>16,869</h2>
-                      </div>
-                    </div>{/* card-body-top */}
                     <div className="page-view-chart-wrapper">
-                      <Line data={this.websiteAudienceChartData} options={this.websiteAudienceChartOptions} />
+                      <Line data={this.RateOfProduction} options={this.chartType1} />
                     </div>{/* flot-chart-wrapper */}
                   </div>{/* card-body */}
                 </div>{/* card */}
               </div>{/* col */}
+
               <div className="col-lg-5 mg-t-20 mg-lg-t-0">
                 <div className="row row-sm">
                   <div className="col-sm-6">
                     <div className="card card-dashboard-two">
+                      <div className="card-header">
+                        <h5>Ingredient 1</h5>
+   
+                      </div>{/* card-header */}
+                      <div className="card-body">
+                        <div className="chart-wrapper">
+                          <Line data={this.Ingredient1} options={this.ChartType2} />
+                        </div>{/* chart-wrapper */}
+                      </div>{/* card-body */}
+                    </div>{/* card */}
+                  </div>{/* col */}
+                  <div className="col-sm-6 mg-t-20 mg-sm-t-0">
+                  <div className="card card-dashboard-two">
                       <div className="card-header">
                         <h6>33.50% <i className="icon ion-md-trending-up tx-success"></i> <small>18.02%</small></h6>
                         <p>Bounce Rate</p>
@@ -474,15 +491,65 @@ export class Dashboard extends Component {
                       </div>{/* card-body */}
                     </div>{/* card */}
                   </div>{/* col */}
-                  <div className="col-sm-6 mg-t-20 mg-sm-t-0">
+                  <div className="col-sm-12 mg-t-20">
+                    <div className="card card-dashboard-three">
+                      <div className="card-header">
+                        <p>All Sessions</p>
+                        <h6>16,869 <small className="tx-success"><i className="icon ion-md-arrow-up"></i> 2.87%</small></h6>
+                        <small>The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc.</small>
+                      </div>{/* card-header */}
+                      <div className="card-body">
+                        <div className="chart d-flex align-items-end">
+                          <Bar data={this.allSessionsChartData} options={this.allSessionsChartOptions} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>{/* row */}
+              </div>{/*col */}
+            </div>{/* row */}
+
+            <div className="row row-sm mg-b-20">
+              <div className="col-lg-6 ht-lg-100p">
+                <div className="card card-dashboard-one">
+                  <div className="card-header">
+                    <div>
+                      <h5 >Rate of Final Product</h5>
+                      {/* <p className="card-text">Audience to which the users belonged while on the current date range.</p> */}
+                    </div>
+                  </div>{/* card-header */}
+                  <div className="card-body">
+                    <div className="page-view-chart-wrapper">
+                      <Line data={this.MachineTemperatures} options={this.chartType1} />
+                    </div>{/* flot-chart-wrapper */}
+                  </div>{/* card-body */}
+                </div>{/* card */}
+              </div>{/* col */}
+
+              <div className="col-lg-5 mg-t-20 mg-lg-t-0">
+                <div className="row row-sm">
+                  <div className="col-sm-6">
                     <div className="card card-dashboard-two">
                       <div className="card-header">
-                        <h6>86k <i className="icon ion-md-trending-down tx-danger"></i> <small>0.86%</small></h6>
-                        <p>Total Users</p>
+                        <h5>Ingredient 1</h5>
+   
                       </div>{/* card-header */}
                       <div className="card-body">
                         <div className="chart-wrapper">
-                          <Bar data={this.totalUsersChartData} options={this.totalUsersChartOptions} />
+                          <Line data={this.Ingredient1} options={this.ChartType2} />
+                        </div>{/* chart-wrapper */}
+                      </div>{/* card-body */}
+                    </div>{/* card */}
+                  </div>{/* col */}
+                  <div className="col-sm-6 mg-t-20 mg-sm-t-0">
+                  <div className="card card-dashboard-two">
+                      <div className="card-header">
+                        <h6>33.50% <i className="icon ion-md-trending-up tx-success"></i> <small>18.02%</small></h6>
+                        <p>Bounce Rate</p>
+                      </div>{/* card-header */}
+                      <div className="card-body">
+                        <div className="chart-wrapper">
+                          <Line data={this.bounceRateChartData} options={this.bounceRateChartOptions} />
                         </div>{/* chart-wrapper */}
                       </div>{/* card-body */}
                     </div>{/* card */}
