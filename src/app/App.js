@@ -5,6 +5,7 @@ import AppRoutes from './AppRoutes'
 import Header from './shared/Header'
 import Footer from './shared/Footer'
 import Auth from '../services/user/authService'
+import './styleMachine.css'
 
 class App extends Component {
   state = {}
