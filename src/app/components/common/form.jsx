@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Joi, { errors } from 'joi'
 import Input from './input'
 import Button from './button'
+import Select from './select'
 
 class Form extends Component {
   state = {
@@ -24,11 +25,22 @@ class Form extends Component {
     const errorMessage = this.validateProperty(input)
     if (errorMessage) errors[input.name] = errorMessage
     else delete errors[input.name]
+    console.log(input)
 
     const data = { ...this.state.data }
     data[input.name] = input.value
 
     this.setState({ data, errors })
+    console.log(this.state.data)
+  }
+
+  handleChangeSelect = (event, name) => {
+    const data = { ...this.state.data }
+    data[name] = event.target.value
+
+    this.setState({ data })
+    console.log(this.state.data)
+    
   }
 
   validate = () => {
@@ -97,6 +109,21 @@ class Form extends Component {
     )
   }
 
+  renderSelect = (name, label, options, property) => {
+    const {data} = this.state
+    return(
+      <Select
+        name = {name}
+        label = {label}
+        options = {options}
+        property = {property}
+        onChange = {this.handleChangeSelect}
+        value = {data[name]}
+      />
+
+    )
+  }
+
   // renderSelect(valueProperty, name, className, options, disabled = false) {
   //     const {data, errors} = this.state;
   //     //console.log("options", options);
@@ -116,6 +143,27 @@ class Form extends Component {
   //             disabled={disabled}
   //         />
   //     );
+  // }
+
+  // renderSelect = (valueProperty, name, className, options, disabled = false) => {
+  //   const {data, errors} = this.state;
+  //   //console.log("options", options);
+  //   //console.log("render select", name, data)
+
+  //    return (
+  //       <Select
+  //           valueProperty={valueProperty}
+  //           name={name}
+  //           className={className}
+  //           value={data[name]}
+  //           options={options}
+  //           onChange={(e) => {
+  //             this.handleChange(e)
+  //           }}
+  //           error={errors[name]}
+  //           disabled={disabled}
+  //       />
+  //   );
   // }
 }
 

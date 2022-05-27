@@ -2,6 +2,7 @@ import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import ProtectedRoute from "./components/common/protectedRoute";
 import ProtectedRouteAdmin from "./components/common/protectedRouteAdmin";
+import AddProductionline from './components/AddProductionline'
 const Dashboard = lazy(() => import("./dashboard/Dashboard"));
 const Machines = lazy(() => import("./pages/Machines"));
 const AddAlarm = lazy(() => import("./pages/AddAlarm"));
@@ -14,6 +15,7 @@ const Profile = lazy(() => import("./pages/Profile"));
 const Signin = lazy(() => import("./pages/Signin"));
 const ChangePassword = lazy(() => import("./pages/ChangePassword"));
 const Logout = lazy(() => import("../app/components/common/logout"));
+const AddMachine = lazy(() => import('../app/components/AddMachine'))
 
 export class AppRoutes extends Component {
   render() {
@@ -21,6 +23,8 @@ export class AppRoutes extends Component {
       <Suspense fallback="">
         <Switch>
           <ProtectedRouteAdmin path="/machines" component={Machines} />
+          <ProtectedRouteAdmin path="/addMachine" component={AddMachine} />
+          <ProtectedRouteAdmin path="/addProductionline" component={AddProductionline} />
           <ProtectedRouteAdmin path="/alarms" component={Alarms} />
 
           <ProtectedRouteAdmin
