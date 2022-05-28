@@ -1,46 +1,59 @@
 import React from "react";
-import { NavLink, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Joi from "joi";
 import Auth from "../../services/user/authService";
 import Form from "../components/common/form";
 
-export class AddAlarm extends Form {
+export class Notifications extends Form {
   state = {
+    soundTrack: [
+      { id: 1, name: "Sound 01" },
+      { id: 2, name: "Sound 02" },
+      { id: 3, name: "Sound 03" },
+      { id: 4, name: "Sound 04" },
+      { id: 5, name: "Sound 05" },
+    ],
+
     data: {
       // every input field, input name == state name
-      alarmname: "",
+      notification_name: "",
       slug: "",
-      nearestmachineid: "",
+      sound_track: "",
     },
+
     errors: {},
   };
 
   schema = Joi.object({
-    alarmname: Joi.string().required(), // required
+    notification_name: Joi.string().required(), // required
     slug: Joi.string().required(),
-    nearestmachineid: Joi.required(),
+    sound_track: Joi.required(),
   });
+
+  doSubmit = async () => {
+    const { notification_name, slug, sound_track } = this.state.data;
+  };
 
   render() {
     return (
       <div>
         <div>
-          <div className="az-signin-wrapper " style={{ minHeight: "600px" }}>
+          <div className="az-signin-wrapper" style={{ minHeight: "600px" }}>
             <div
               className="az-card-signin"
               style={{ justifyItems: "normal", height: "450px" }}
             >
-              <h4>Add Alarm</h4>
+              <h4>Add Notifications</h4>
               <form>
                 <div className="form-group">
                   {this.renderInput(
-                    "alarmname",
-                    "Alarm Name",
-                    "Enter Alarm Name",
+                    "notification_name",
+                    "Notification Name",
+                    "Enter Notification Name",
                     null,
                     null,
                     null,
-                    "form-control",
+                    null,
                     null
                   )}
                 </div>
@@ -52,23 +65,24 @@ export class AddAlarm extends Form {
                     null,
                     null,
                     null,
-                    "form-control",
+                    null,
                     null
                   )}
                 </div>
                 <div className="form-group">
-                  {this.renderInput(
-                    "nearestmachineid",
-                    "Nearest Machine Id",
-                    "Enter Machine ID",
-                    null,
-                    null,
-                    null,
-                    "form-control",
-                    null
+                  {this.renderSelect(
+                    "sound_track",
+                    "Sound Track",
+                    this.state.soundTrack,
+                    "name"
                   )}
                 </div>
-                {this.renderButton("Add Alarm", "Add Alarm", null, null)}
+                {this.renderButton(
+                  "Add Notification",
+                  "Add Notification",
+                  null,
+                  null
+                )}
               </form>
             </div>
           </div>
@@ -78,4 +92,4 @@ export class AddAlarm extends Form {
   }
 }
 
-export default AddAlarm;
+export default Notifications;
