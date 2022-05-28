@@ -22,10 +22,37 @@
     display: block; 
   }
   .adding button {
-    background: #5b47fb;
+    background-color: #5b47fb;
     color: #fff;
     border: 0;
     padding: 8px;
     border-radius: 8px;
     cursor: pointer;
+    margin-top: 30px;
   }
+
+  .adding button:hover{
+    background-color: #270ee0 ;
+  }
+  
+.machine-table{
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .machine-table h2 {
+    /* font-size: 20px; */
+    color: #5b47fb;
+    margin-bottom: 30px;
+  }
+
+  .machine-table th{
+  height: 40px;
+  vertical-align: middle;
+  }
+
+  .machine-table button{
+    height: 40px;
+  }
+  

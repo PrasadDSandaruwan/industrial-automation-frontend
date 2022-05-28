@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 class Select extends Component{
     render(){
+
         const{
             name,
             label,
@@ -29,7 +30,7 @@ class Select extends Component{
                 </select>
             </div>
      
-  </React.Fragment>
+        </React.Fragment>
 
 
            

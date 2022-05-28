@@ -18,7 +18,12 @@ export class AddMachine extends Form{
       name : 'testing 05', 
     } ],
 
-    
+    isautomated : 
+      [{id : 0,
+      name : 'No',
+    }, {id : 1,
+      name : 'Yes',
+    } ],
 
     data : {
       //every input field name == state name
@@ -51,7 +56,7 @@ export class AddMachine extends Form{
   render() {
     return(
       <div className="adding">
-      <h2>Add a New Machine</h2>
+      <h2 className='py-3'>Add a New Machine</h2>
       
       <form action="#">
         {/* <label>Machine type</label>
@@ -72,7 +77,7 @@ export class AddMachine extends Form{
             null,
             null,
             null,
-            null,
+
           )}
         </div>
 
@@ -125,7 +130,13 @@ export class AddMachine extends Form{
         </div>
 
         <div className="form-group">
-          {this.renderInput(
+          {this.renderSelect(
+              'isAutomated',
+              'Is Automated',
+              this.state.isautomated,
+              'name'
+              )}
+          {/* {this.renderInput(
             'isAutomated',
             'Is Automated',
             null,
@@ -134,7 +145,7 @@ export class AddMachine extends Form{
             null,
             null,
             null,
-          )}
+          )} */}
         </div>
 
 
