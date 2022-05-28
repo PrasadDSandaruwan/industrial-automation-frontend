@@ -30,7 +30,7 @@ function Alarms() {
           </div>
           <Route exact path="/alarms/all-alarms" component={AllAlarm} />
           <Route exact path="/alarms/add-alarm" component={AddAlarm} />
-          <Route exact path="/alarms/edit-alarm" component={EditAlarm} />
+          <Route exact path="/alarms/edit-alarm/:id" component={EditAlarm} />
         </div>
       </div>
     </div>

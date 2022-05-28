@@ -27,9 +27,21 @@ export class AddAlarm extends Form {
   });
 
   componentDidMount = async () => {
-    const response = await MachineService.getAllMachines();
-    console.log("All machines response data", response.data.data);
-    this.setState({ nearestMachine: response.data.data });
+    try {
+      const response = await MachineService.getAllMachines();
+      console.log("All machines response data", response.data.data);
+      if (response.status === 200) {
+        if (response.data.code === 200) {
+          this.setState({ nearestMachine: response.data.data });
+          console.log(response.data.data);
+        } else {
+          alert(response.data.data);
+        }
+      }
+    } catch (error) {
+      alert("Error occured!");
+      console.log("Error", error);
+    }
   };
 
   doSubmit = async () => {
