@@ -100,7 +100,7 @@ export class Header extends Component {
                         : "nav-item"
                     }
                   >
-                    <Link to="/usermanagement" className="nav-link">
+                    <Link to="/usermanagement/view-all-users" className="nav-link">
                       User Management
                     </Link>
                   </li>
