@@ -1,44 +1,46 @@
 import React, {Component} from 'react'
 import ViewAllTable from '../components/common/viewAllTable'
+import EditMachine from '../components/EditMachine'
+import { Route } from 'react-router-dom'
 
 export class ViewAllMachine extends Component{
     state = {
-        columnNames : ['id','test02', 'test03','test04','test05'],
+        columnNames : ['id','Production_Line', 'Machine_Name','License_Number','Is_Automated'],
         tableData : [
             {
                 id : '01',
-                test02 : 'testdata02',
-                test03 : 'testdata03',
-                test04 : 'testdata04',
-                test05 : 'testdata05',
+                Production_Line : 'testdata02',
+                Machine_Name : 'testdata03',
+                License_Number : 'testdata04',
+                Is_Automated : 'testdata05',
             },
             {
                 id : '02',
-                test02 : 'testdata02',
-                test03 : 'testdata03',
-                test04 : 'testdata04',
-                test05 : 'testdata05',
+                Production_Line : 'testdata02',
+                Machine_Name : 'testdata03',
+                License_Number : 'testdata04',
+                Is_Automated : 'testdata05',
             },
             {
                 id : '03',
-                test02 : 'testdata02',
-                test03 : 'testdata03',
-                test04 : 'testdata04',
-                test05 : 'testdata05',
+                Production_Line : 'testdata02',
+                Machine_Name : 'testdata03',
+                License_Number : 'testdata04',
+                Is_Automated : 'testdata05',
             },
             {
                 id : '04',
-                test02 : 'testdata02',
-                test03 : 'testdata03',
-                test04 : 'testdata04',
-                test05 : 'testdata05',
+                Production_Line : 'testdata02',
+                Machine_Name : 'testdata03',
+                License_Number : 'testdata04',
+                Is_Automated : 'testdata05',
             },
             {
                 id : '05',
-                test02 : 'testdata02',
-                test03 : 'testdata03',
-                test04 : 'testdata04',
-                test05 : 'testdata05',
+                Production_Line : 'testdata02',
+                Machine_Name : 'testdata03',
+                License_Number : 'testdata04',
+                Is_Automated : 'testdata05',
             }
         ]
 
@@ -53,15 +55,20 @@ export class ViewAllMachine extends Component{
 
     render(){
         return(
-            <div className="allmachine">
-                <h2>All Machines</h2>
+            <div class="table-responsive">
+            <div className="allmachine machine-table">
+                <h2 className='py-3'>All Machines</h2>
                 <ViewAllTable 
                     columnNames = {this.state.columnNames}
                     tableData = {this.state.tableData}
-                    editURL = "EDIT URL"
+                    editURL = 'edit-machine-details/'
                     onDelete = {this.handleDelete}
                 />
+                <Route exact path="/machines/edit-machine-details/:id"><EditMachine/></Route>
             </div>
+            </div>
+           
+
         )
     }
 }

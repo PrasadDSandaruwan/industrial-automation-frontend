@@ -27,7 +27,7 @@ export class AddProductionline extends Form{
   render() {
     return(
       <div className="adding">
-      <h2>Add a New Production Line</h2>
+      <h2 className = "py-3" >Add a New Production Line</h2>
       
       <form action="#">
     

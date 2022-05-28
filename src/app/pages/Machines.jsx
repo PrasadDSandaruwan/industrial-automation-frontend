@@ -5,6 +5,7 @@ import { Route, NavLink } from 'react-router-dom'
 // const AddMachine = lazy(() => import('../components/AddMachine'))
 import AddMachine from '../components/AddMachine'
 import AddProductionline from '../components/AddProductionline'
+import AddInitialRates from '../components/AddInitialRates'
 import { ViewAllMachine } from '../components/viewAllMachine'
 
 
@@ -20,12 +21,14 @@ function Machines() {
               <NavLink className="nav-link" to="/machines/view-all-machines">View All Machines</NavLink>
               <NavLink  className="nav-link" to="/machines/add-machine">Add a Machine</NavLink>
               <NavLink  className="nav-link"  to="/machines/add-production-line">Add a Production Line</NavLink>
+              <NavLink  className="nav-link"  to="/machines/add-initial-rates">Add Initial Rates</NavLink>
               <NavLink  className="nav-link"  to="#/">More</NavLink>
             </nav>
           </div>
           <Route exact path="/machines/view-all-machines" component={ViewAllMachine}></Route>
           <Route exact path="/machines/add-machine" component={AddMachine}></Route>
           <Route exact path="/machines/add-production-line" component={AddProductionline}></Route>
+          <Route exact path="/machines/add-initial-rates" component={AddInitialRates}></Route>
         </div>
       </div>
       
