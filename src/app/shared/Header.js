@@ -86,7 +86,7 @@ export class Header extends Component {
                         : "nav-item"
                     }
                   >
-                    <Link to="/alarms" className="nav-link">
+                    <Link to="/alarms/all-alarms" className="nav-link">
                       Alarms
                     </Link>
                   </li>
