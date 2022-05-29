@@ -20,9 +20,9 @@ export class AddUser extends Form {
       last_name: "",
       email: "",
       nic: "",
-      birthDay: "",
-      contactNo: "",
-      userTypeId: 1,
+      birthday: "",
+      contact_no: "",
+      user_type_id: 1,
     },
     errors: {}, // is A must
   };
@@ -33,12 +33,12 @@ export class AddUser extends Form {
       minDomainSegments: 2,
       tlds: { allow: ["com", "net"] },
     }), // email
-    firstName: Joi.string().required(), // string, required
-    lasttName: Joi.string().required(),
+    first_name: Joi.string().required(), // string, required
+    last_name: Joi.string().required(),
     nic: Joi.string().required(),
-    birthDay: Joi.date().required(),
-    contactNo: Joi.string(),
-    userTypeId: Joi.string().required(),
+    birthday: Joi.date().required(),
+    contact_no: Joi.string(),
+    user_type_id: Joi.string().required(),
   });
 
   // must impliment this
@@ -77,25 +77,10 @@ export class AddUser extends Form {
     return (
       <div className="adding">
         <h2>New User form</h2>
-        {/* <div className="az-signin-header"> */}
-        {/* <h2>Welcome</h2> */}
-        {/* <h4>Please sign in to continue</h4> */}
         <form action="#">
           <div className="form-group">
             {this.renderInput(
-              "userId",
-              "User Id",
-              "Enter user id",
-              null,
-              null,
-              null,
-              null,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "firstName",
+              "first_name",
               "First Name",
               "Enter first name",
               null,
@@ -107,7 +92,7 @@ export class AddUser extends Form {
           </div>
           <div className="form-group">
             {this.renderInput(
-              "lastName",
+              "last_name",
               "Last Name",
               "Enter last name",
               null,
@@ -143,7 +128,7 @@ export class AddUser extends Form {
           </div>
           <div className="form-group">
             {this.renderInput(
-              "birthDay",
+              "birthday",
               "Birth Day",
               "Enter birth day",
               null,
@@ -155,7 +140,7 @@ export class AddUser extends Form {
           </div>
           <div className="form-group">
             {this.renderInput(
-              "contactNo",
+              "contact_no",
               "Contact No",
               "Enter contact no",
               null,
@@ -167,7 +152,7 @@ export class AddUser extends Form {
           </div>
           <div className="form-group">
             {this.renderSelect(
-              "userTypeId",
+              "user_type_id",
               "User Type Id",
               this.state.user_type,
               'name'
@@ -176,9 +161,7 @@ export class AddUser extends Form {
           {this.renderButton("Add User", "Add User", null, null)}
         </form>
       </div>
-      //   </div>
-      // </div>
-      //   </div>
+     
     );
   }
 }
