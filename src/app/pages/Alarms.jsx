@@ -1,8 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import { NavLink, Route } from "react-router-dom";
-import Joi from "joi";
-import Auth from "../../services/user/authService";
-import Form from "../components/common/form";
 import AddAlarm from "../components/AddAlarm";
 import EditAlarm from "../components/EditAlarm";
 import AllAlarm from "../components/allalarms";
@@ -20,9 +17,7 @@ function Alarms() {
               <NavLink className="nav-link " to="/alarms/add-alarm">
                 Add Alarm
               </NavLink>
-              <NavLink className="nav-link" to="/alarms/edit-alarm">
-                Edit Alarm
-              </NavLink>
+
               <NavLink className="nav-link" to="#/">
                 More
               </NavLink>

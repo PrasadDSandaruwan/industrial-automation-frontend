@@ -1,10 +1,10 @@
 import React from "react";
 import Joi from "joi";
-import Auth from "../../services/user/authService";
 import Form from "../components/common/form";
 import MachineService from "../../services/admin/machineService";
 import AlarmService from "../../services/admin/alarmService";
 import { Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export class EditAlarm extends Form {
   state = {
@@ -36,16 +36,13 @@ export class EditAlarm extends Form {
       this.setState({ id });
       const alarm_data = await AlarmService.getAlarmDetails(id);
       const response = await MachineService.getAllMachines();
-      console.log("All machines response data", response.data.data);
       if (response.status === 200) {
         if (response.data.code === 200) {
           this.setState({
             nearestMachine: response.data.data,
             isRedirect: false,
           });
-          console.log(response.data.data);
         } else {
-          alert(response.data.data);
           this.setState({ isRedirect: true });
         }
       } else {
@@ -58,7 +55,6 @@ export class EditAlarm extends Form {
           data.slug = alarm_data.data.data.slug;
           data.nearest_machine_id = alarm_data.data.data.nearest_machine.id;
           this.setState({ data, isRedirect: false });
-          console.log(alarm_data.data.data);
         } else {
           alert(alarm_data.data.data);
           this.setState({ isRedirect: true });
@@ -67,9 +63,8 @@ export class EditAlarm extends Form {
         this.setState({ isRedirect: true });
       }
     } catch (error) {
-      console.log("Error", error);
-      alert("Error Occured!");
       this.setState({ isRedirect: true });
+      toast.error("Error Occured!");
     }
   };
 
@@ -79,17 +74,18 @@ export class EditAlarm extends Form {
         this.state.data,
         this.state.id
       );
-      console.log("succesful");
+
       if (response.status === 200) {
         if (response.data.code === 200) {
-          alert(response.data.message);
+          toast.success(response.data.message);
         } else {
-          alert(response.data.message);
+          toast.error(response.data.message);
         }
+      } else {
+        toast.error(response.data.message);
       }
     } catch (error) {
-      alert("Error occured!");
-      console.log("Error", error);
+      toast.error("Error occured!");
     }
   };
 
