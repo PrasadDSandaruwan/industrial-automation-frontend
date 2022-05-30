@@ -19,26 +19,26 @@ export class AppRoutes extends Component {
     return (
       <Suspense fallback="">
         <Switch>
-          <ProtectedRouteAdmin path="/machines" component={Machines} />
-          <ProtectedRouteAdmin path="/addMachine" component={AddMachine} />
-          <ProtectedRouteAdmin
+          <Route path="/machines" component={Machines} />
+          <Route path="/addMachine" component={AddMachine} />
+          <Route
             path="/addProductionline"
             component={AddProductionline}
           />
-          <ProtectedRouteAdmin path="/alarms" component={Alarms} />
+          <Route path="/alarms" component={Alarms} />
 
-          <ProtectedRouteAdmin
+          <Route
             path="/usermanagement"
             component={UserManagement}
           />
-          <ProtectedRoute path="/profile" component={Profile} />
+          <Route path="/profile" component={Profile} />
           <Route exact path="/signin" component={Signin} />
 
-          <ProtectedRoute path="/changepassword" component={ChangePassword} />
-          <ProtectedRoute path="/dasboard" component={Dashboard} />
-          <ProtectedRoute path="/logout" component={Logout} />
+          <Route path="/changepassword" component={ChangePassword} />
+          <Route path="/dasboard" component={Dashboard} />
+          <Route path="/logout" component={Logout} />
 
-          <ProtectedRouteAdmin
+          <Route
             path="/notifications"
             component={Notifications}
           />
