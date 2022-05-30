@@ -2,21 +2,18 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import Joi from 'joi'
 import Form from './common/form'
+import MachineServices from '../../services/admin/machineService'
+import ProductionLineService from '../../services/admin/productionLineService';
+
 
 export class EditMachine extends Form{
   state = {
-    produtionline : 
-      [{id : 1,
-      name : 'testing 01', 
-    }, {id : 2,
-      name : 'testing 02', 
-    } , {id : 3,
-      name : 'testing 03', 
-    }, {id : 4,
-      name : 'testing 04', 
-    }, {id : 5,
-      name : 'testing 05', 
-    } ],
+    isRedirect : false,
+    produtionline : [],
+    
+    machinetype : [],
+
+    id : 1,
 
     isautomated : 
       [{id : 0,
@@ -27,12 +24,12 @@ export class EditMachine extends Form{
 
     data : {
       //every input field name == state name
-      productionLine : 1,
-      machineType : 2,
-      machineName : '',
+      production_line_id : 1,
+      machine_type_id : 2,
+      name : '',
       slug : '',
-      licenseNumber : '',  
-      isAutomated : 1
+      license_number : '',  
+      is_automated : 1
 
     },
     errors : {},
@@ -40,18 +37,62 @@ export class EditMachine extends Form{
 
   //error handling
   schema = Joi.object({
-    productionLine: Joi.number().required(),
-    machineType : Joi.number().required(),
-    machineName : Joi.string().required(),
+    production_line_id: Joi.number().required(),
+    machine_type_id : Joi.number().required(),
+    name : Joi.string().required(),
     slug : Joi.string().required(),
-    licenseNumber : Joi.string().required(),
-    isAutomated : Joi.number().required(),
+    license_number : Joi.string().required(),
+    is_automated : Joi.number().required(),
   })
 
-  doSubmit = async () => {
-    const {productionLine, machineType, machineName, slug, licenseNumber, isAutomated } = this.state.data
+  componentDidMount = async () => {
+    const id = this.props.match.params.id;
+    this.setState({ id });
+    const responseGetMachineTypes = await MachineServices.getMachineTypes();
+    const responseGetProductionLine = await ProductionLineService.getProductionLinesID();
+    const responseGetMachineDetails = await MachineServices.editMachineView(id); 
+    console.log("All machines details",responseGetMachineDetails.data.data);
+    
+    if (responseGetMachineTypes.status === 200 && responseGetProductionLine.status === 200 && responseGetMachineDetails.status === 200 ) {
+      if (responseGetMachineTypes.data.code === 200 && responseGetProductionLine.data.code === 200 && responseGetMachineDetails.data.code === 200) {
+        const data = {...this.data}
+        data.production_line_id = responseGetMachineDetails.data.data.production_line.id;
+        data.machine_type_id = responseGetMachineDetails.data.data.machine_type.id;
+        data.name = responseGetMachineDetails.data.data.name;
+        data.slug = responseGetMachineDetails.data.data.slug;
+        data.license_number = responseGetMachineDetails.data.data.license_number;
+        data.is_automated = responseGetMachineDetails.data.data.is_automated;
+        this.setState({ produtionline : responseGetProductionLine.data.data, machinetype : responseGetMachineTypes.data.data, isRedirect : false, data});
+      
+      } else {
+      this.setState({ isRedirect: true });
+      }
+    } else {
+      this.setState({ isRedirect: true });
+    }
+    
+    
+    
+   
+  };
 
-  }
+  doSubmit = async () => {
+    try {
+      const response = await MachineServices.saveMachineView(this.state.data, this.state.id);
+      console.log("succesful");
+      if (response.status === 200) {
+        if (response.data.code === 200) {
+
+          alert(response.data.message);
+        } else {
+          alert(response.data.message);
+        }
+      }
+    } catch (error) {
+      alert("Error occured!");
+      console.log("Error", error);
+    }
+  };
 
   render() {
     return(
@@ -61,31 +102,28 @@ export class EditMachine extends Form{
       <form action="#">
 
 
-        <div className="form-group">
-          {this.renderInput(
-            'productionLine',
-            'Production Line',
-            'Enter the Production Line',
-            null,
-            null,
-            null,
-            null,
-
+      <div className="form-group">
+        
+        {this.renderSelect(
+          'production_line_id',
+          'Production Line',
+          this.state.produtionline,
+          'line_name'
           )}
         </div>
 
         <div className="form-group">
           {this.renderSelect(
-            'machineType',
+            'machine_type_id',
             'Machine Type',
-            this.state.produtionline,
-            'name'
+            this.state.machinetype,
+            'machine_type_name'
             )}
         </div>
 
         <div className="form-group">
           {this.renderInput(
-            'machineName',
+            'name',
             'Machine Name',
             'Enter the machine name',
             null,
@@ -111,7 +149,7 @@ export class EditMachine extends Form{
 
         <div className="form-group">
           {this.renderInput(
-            'licenseNumber',
+            'license_number',
             'License Number',
             'Enter the License Number',
             null,
@@ -124,7 +162,7 @@ export class EditMachine extends Form{
 
         <div className="form-group">
           {this.renderSelect(
-              'isAutomated',
+              'is_automated',
               'Is Automated',
               this.state.isautomated,
               'name'
