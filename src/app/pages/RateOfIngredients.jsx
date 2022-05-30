@@ -1,0 +1,63 @@
+import React, { Component } from 'react'
+import Chart from '../charts/Chart'
+import Select from '../components/common/select'
+
+export default class RateOfIngredients extends Component {
+
+    finalProduction = {
+        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51'],
+        datasets: [{
+            data: [27.2, 29.9, 29.6, 25.7, 25.9, 29.3, 31.1, 27.9, 28.4, 25.4, 23.2, 18.2, 14, 12.7, 11, 13.7, 9.7, 12.6, 10.9, 12.7, 13.8, 12.9, 13.8, 10.2, 5.8, 7.6, 8.8, 5.6, 5.6, 6.3, 4.2, 3.6, 5.4, 6.5, 8.1, 10.9, 7.6, 9.7, 10.9, 9.5, 5.4, 4.9, .7, 2.3, 5.5, 10, 10.6, 8.3, 8.4, 8.5, 5.8],
+            borderWidth: 2,
+            fill: false,
+            backgroundColor: ['rgba(0, 204, 212, .2)'],
+            borderColor: ['rgb(0, 204, 212)']
+        }]
+    }
+
+    state = {
+        machines:[
+            {id:1, machine: 'machine 1'},
+            {id:2, machine: 'machine 2'},
+            {id:3, machine: 'machine 3'},
+            {id:4, machine: 'machine 4'}
+        ],       
+
+        data:{
+            machine_id: 1
+        },
+
+    }
+
+    handleChangeSelect = (event, name) => {
+        const data = { ...this.state.data }
+        data[name] = event.target.value
+    
+        this.setState({ data })
+        console.log(this.state.data)
+        
+      }
+
+    render() {
+        return (
+            <div className="row row-sm mg-b-20 justify-content-center">
+                <div className='row'>
+                <form action='#'>
+                    {/* <div className='form-group'>
+                        
+                    {this.state.machines.map((m, index) => {
+                  return <option>{m.machine}</option>;
+                })}
+                    </div> */}
+                <Select name='machine_id' options={this.state.machines} label='Select Machine' property='machine' onChange= {this.handleChangeSelect}>
+                    </Select>   
+                </form>
+                </div>
+
+                <div className="col-lg-6 ht-lg-100p">
+                    <Chart title="Rate of Final Production" labels={this.finalProduction.labels} datasets={this.finalProduction.datasets} machineId={200} />
+                </div>
+            </div>
+        )
+    }
+}
