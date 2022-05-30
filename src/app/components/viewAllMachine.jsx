@@ -2,56 +2,55 @@ import React, {Component} from 'react'
 import ViewAllTable from '../components/common/viewAllTable'
 import EditMachine from '../components/EditMachine'
 import { Route } from 'react-router-dom'
+import MachineService from '../../services/admin/machineService'
 
 export class ViewAllMachine extends Component{
     state = {
-        columnNames : ['id','Production_Line', 'Machine_Name','License_Number','Is_Automated'],
-        tableData : [
-            {
-                id : '01',
-                Production_Line : 'testdata02',
-                Machine_Name : 'testdata03',
-                License_Number : 'testdata04',
-                Is_Automated : 'testdata05',
-            },
-            {
-                id : '02',
-                Production_Line : 'testdata02',
-                Machine_Name : 'testdata03',
-                License_Number : 'testdata04',
-                Is_Automated : 'testdata05',
-            },
-            {
-                id : '03',
-                Production_Line : 'testdata02',
-                Machine_Name : 'testdata03',
-                License_Number : 'testdata04',
-                Is_Automated : 'testdata05',
-            },
-            {
-                id : '04',
-                Production_Line : 'testdata02',
-                Machine_Name : 'testdata03',
-                License_Number : 'testdata04',
-                Is_Automated : 'testdata05',
-            },
-            {
-                id : '05',
-                Production_Line : 'testdata02',
-                Machine_Name : 'testdata03',
-                License_Number : 'testdata04',
-                Is_Automated : 'testdata05',
-            }
-        ]
-
-        
-
+        columnNames : ['id','Production_Line', 'Machine_Name', 'Machine_Type', 'Slug', 'License_Number','Is_Automated'],
+        tableData : [],
     }
 
-    handleDelete = (id) => {
+    componentDidMount = async () => {
+        const response = await MachineService.getAllMachines() ;
+        const tableData = [];
+        console.log(response.data.data);
+        const response_data = response.data.data;
+    
+        if (response_data.length > 0) {
+          for (let i = 0; i < response_data.length; i++) {
+            let row = {
+                id : response_data[i].id,
+                Production_Line: response_data[i].production_line.line_name,
+                "Machine_Name": response_data[i].name,
+                Machine_Type : response_data[i].machine_type.machine_type_name,
+                Slug: response_data[i].slug,
+                License_Number : response_data[i].license_number,
+                Is_Automated : response_data[i].is_automated ? 'Yes' : 'No',                
+            };
+            tableData.push(row);
+          }
+        }
+        this.setState({ tableData });
+    
+        console.log("res_data", response_data);
+      };
 
-        console.log("testing " + id)
-    }
+      handleDelete = async (id) => {
+        alert("Are you sure ?");
+        const response = MachineService.deleteMachine(id);
+        const data = [...this.state.tableData];
+        const deleted = [];
+        for (let i = 0; i < data.length; i++) {
+          console.log(data[i].id);
+          console.log(id);
+          console.log(data[i].id !== id);
+          if (data[i].id !== id) {
+            deleted.push(data[i]);
+          }
+        }
+        this.setState({ tableData: deleted });
+        console.log("testing " + id);
+      };
 
     render(){
         return(
@@ -64,7 +63,7 @@ export class ViewAllMachine extends Component{
                     editURL = 'edit-machine-details/'
                     onDelete = {this.handleDelete}
                 />
-                <Route exact path="/machines/edit-machine-details/:id"><EditMachine/></Route>
+               
             </div>
             </div>
            
