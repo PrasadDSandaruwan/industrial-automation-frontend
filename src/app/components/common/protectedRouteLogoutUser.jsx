@@ -2,7 +2,7 @@ import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import Auth from '../../../services/user/authService'
 
-const ProtectedRoute = ({ path, component: Component, render, ...rest }) => {
+const ProtectedRouteLogoutUser = ({ path, component: Component, render, ...rest }) => {
   return (
     <Route
       exact
@@ -18,19 +18,11 @@ const ProtectedRoute = ({ path, component: Component, render, ...rest }) => {
               }}
             />
           )
-          if (Auth.getForcePassword()==="FORCE_PASSWORD_CHANGE_PENDING")
-          return (
-            <Redirect
-              to={{
-                pathname: "/force-change-password",
-                state: { from: props.location },
-              }}
-            />
-          )
+         
         return Component ? <Component {...props} /> : render(props)
       }}
     />
   )
 }
 
-export default ProtectedRoute
+export default ProtectedRouteLogoutUser

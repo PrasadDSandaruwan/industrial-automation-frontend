@@ -32,7 +32,13 @@ function loginWithJwt(access_token, refresh_token) {
 
   localStorage.setItem('access_token', access_token)
   localStorage.setItem('refresh_token', refresh_token)
+
 }
+
+function setForcePassword(force_change) {
+  localStorage.setItem('force_change',force_change)
+}
+
 
 export function getCurrentUser() {
   try {
@@ -49,16 +55,23 @@ export function getCurrentUser() {
 export function logout() {
   localStorage.removeItem('access_token')
   localStorage.removeItem('refresh_token')
+  localStorage.removeItem('force_change')
 }
 
 export function getJwt() {
   return localStorage.getItem('access_token')
 }
 
+export function getForcePassword() {
+  return localStorage.getItem('force_change')
+}
+
 export function getUserRole() {
   const user = getCurrentUser()
   return user.authorities[0]
 }
+
+
 
 export default {
   login,
@@ -67,4 +80,6 @@ export default {
   logout,
   getJwt,
   getUserRole,
+  setForcePassword,
+  getForcePassword,
 }

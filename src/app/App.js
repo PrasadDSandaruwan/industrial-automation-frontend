@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import './App.scss'
@@ -23,7 +22,7 @@ class App extends Component {
       ""
     );
     let footerComponent = !this.state.isFullPageLayout ? <Footer /> : "";
-
+    
     return (
       <div>
         <ToastContainer/>
