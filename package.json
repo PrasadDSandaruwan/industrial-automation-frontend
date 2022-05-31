@@ -40,11 +40,11 @@
     "react-scripts": "3.3.0",
     "react-select": "^3.0.8",
     "react-simplemde-editor": "^4.1.0",
-    "react-toastify": "^9.0.2",
+    "react-toastify": "^9.0.1",
     "typicons.font": "^2.0.9"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
