@@ -34,6 +34,16 @@ const ProtectedRouteAdmin = ({
           )
         }
 
+        if (Auth.getForcePassword()==="FORCE_PASSWORD_CHANGE_PENDING")
+        return (
+          <Redirect
+            to={{
+              pathname: "/force-change-password",
+              state: { from: props.location },
+            }}
+          />
+        )
+
         return Component ? <Component {...props} /> : render(props)
       }}
     />

@@ -2,7 +2,10 @@ import React, { Component, Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import ProtectedRoute from "./components/common/protectedRoute";
 import ProtectedRouteAdmin from "./components/common/protectedRouteAdmin";
+import ProtectedRouteForcePassword from "./components/common/protectedRouteForcePassword";
 import AddProductionline from "./components/AddProductionline";
+import ForcePasswordChange from "./components/forcePasswordChange";
+import ProtectedRouteLogoutUser from "./components/common/protectedRouteLogoutUser";
 const Dashboard = lazy(() => import("./dashboard/Dashboard"));
 const Machines = lazy(() => import("./pages/Machines"));
 const Alarms = lazy(() => import("./pages/Alarms"));
@@ -26,7 +29,7 @@ export class AppRoutes extends Component {
             component={AddProductionline}
           />
           <ProtectedRouteAdmin path="/alarms" component={Alarms} />
-
+ 
           <ProtectedRouteAdmin
             path="/usermanagement"
             component={UserManagement}
@@ -34,10 +37,10 @@ export class AppRoutes extends Component {
           <ProtectedRoute path="/profile" component={Profile} />
           <Route exact path="/signin" component={Signin} />
 
-          <ProtectedRoute path="/changepassword" component={ChangePassword} />
+          <ProtectedRouteForcePassword path="/force-change-password" component={ForcePasswordChange} />
           <ProtectedRoute path="/dasboard" component={Dashboard} />
-          <ProtectedRoute path="/logout" component={Logout} />
-
+          <ProtectedRouteLogoutUser path="/logout" component={Logout} />
+ 
           <ProtectedRouteAdmin
             path="/notifications"
             component={Notifications}

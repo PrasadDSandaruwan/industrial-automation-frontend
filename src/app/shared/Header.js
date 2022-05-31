@@ -191,10 +191,10 @@ export class Header extends Component {
                     <span>Position</span>
                   </div>
 
-                  <Link to="/Profile" className="dropdown-item">
+                  <Link to="/profile/user-profile" className="dropdown-item">
                     <i className="typcn typcn-user-outline"></i> My Profile
                   </Link>
-                  <Link to="/Profile" className="dropdown-item">
+                  <Link to="/profile/user-profile" className="dropdown-item">
                     <i className="typcn typcn-edit"></i> Edit Profile
                   </Link>
                   <Link to="/logout" className="dropdown-item">
