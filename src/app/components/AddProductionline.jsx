@@ -2,12 +2,13 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import Joi from 'joi'
 import Form from './common/form'
+import ProductionLineService from '../../services/admin/productionLineService';
 
 export class AddProductionline extends Form{
   state = {
     data : {
       //every input field name == state name
-      lineName : '',
+      production_line_name : '',
       slug : '',
     },
     errors : {},
@@ -15,14 +16,35 @@ export class AddProductionline extends Form{
 
   //error handling
   schema = Joi.object({
-    lineName : Joi.string().required(),
+    production_line_name : Joi.string().required(),
     slug : Joi.string().required(),  
   })
 
   doSubmit = async () => {
-    const {lineName, slug} = this.state.data
+    try {
+      const response = await ProductionLineService.addProductionLine(this.state.data);
+      console.log("succesful");
+      if (response.status === 200) {
+        if (response.data.code === 200) {
+          const data = {
+            // every input field, input name == state name
+            production_line_name : '',
+            slug : '',
+          };
+          this.setState({ data });
 
-  }
+          alert(response.data.message);
+        } else {
+          alert(response.data.message);
+        }
+      }
+    } catch (error) {
+      alert("Error occured!");
+      console.log("Error", error);
+    }
+  };
+
+  
 
   render() {
     return(
@@ -33,7 +55,7 @@ export class AddProductionline extends Form{
     
         <div className="form-group">
           {this.renderInput(
-            'lineName',
+            'production_line_name',
             'Line Name',
             'Enter the Line Name',
             null,

@@ -1,10 +1,9 @@
 import React from "react";
-import { NavLink, Redirect } from "react-router-dom";
 import Joi from "joi";
-import Auth from "../../services/user/authService";
 import Form from "../components/common/form";
 import AlarmService from "../../services/admin/alarmService";
 import MachineService from "../../services/admin/machineService";
+import { toast } from "react-toastify";
 
 export class AddAlarm extends Form {
   state = {
@@ -27,15 +26,25 @@ export class AddAlarm extends Form {
   });
 
   componentDidMount = async () => {
-    const response = await MachineService.getAllMachines();
-    console.log("All machines response data", response.data.data);
-    this.setState({ nearestMachine: response.data.data });
+    try {
+      const response = await MachineService.getAllMachines();
+      console.log("All machines response data", response.data.data);
+      if (response.status === 200) {
+        if (response.data.code === 200) {
+          this.setState({ nearestMachine: response.data.data });
+        } else {
+          toast.error(response.data.data);
+        }
+      }
+    } catch (error) {
+      toast.error("Error Occured!");
+    }
   };
 
   doSubmit = async () => {
     try {
       const response = await AlarmService.addAlarm(this.state.data);
-      console.log("succesful");
+
       if (response.status === 200) {
         if (response.data.code === 200) {
           const data = {
@@ -46,14 +55,14 @@ export class AddAlarm extends Form {
           };
           this.setState({ data });
 
-          alert(response.data.message);
+          toast.success(response.data.message);
         } else {
-          alert(response.data.message);
+          //alert(response.data.message);
+          toast.error(response.data.message);
         }
       }
     } catch (error) {
-      alert("Error occured!");
-      console.log("Error", error);
+      toast.error("Error Occured!");
     }
   };
 

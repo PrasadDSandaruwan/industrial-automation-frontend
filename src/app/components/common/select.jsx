@@ -9,7 +9,8 @@ class Select extends Component{
             options,
             property,
             onChange,
-            value
+            value,
+            disabled = false,
 
         } = this.props
     
@@ -21,7 +22,7 @@ class Select extends Component{
                 <label htmlFor={name}>
                     {label}
                 </label>
-                <select className="form-control" id={name} onChange = {event => onChange(event, name)} >
+                <select className="form-control" id={name} onChange = {event => onChange(event, name)} disabled = {disabled} >
                     {options.length > 0 && options.map(option => (
                         <option key={option.id} value={option.id} selected = {option.id === value}  >
                             {option[property]}

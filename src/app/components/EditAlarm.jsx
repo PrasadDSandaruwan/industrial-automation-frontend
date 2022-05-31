@@ -1,34 +1,18 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import Joi from "joi";
-import Auth from "../../services/user/authService";
 import Form from "../components/common/form";
+import MachineService from "../../services/admin/machineService";
+import AlarmService from "../../services/admin/alarmService";
+import { Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export class EditAlarm extends Form {
   state = {
-    nearestMachine: [
-      { id: 1, name: "testing 01" },
-      { id: 2, name: "testing 02" },
-      { id: 3, name: "testing 03" },
-      { id: 4, name: "testing 04" },
-      { id: 5, name: "testing 05" },
-    ],
+    isRedirect: false,
 
-    alarmName: [
-      { id: 1, name: "Alarm 01" },
-      { id: 2, name: "Alarm 02" },
-      { id: 3, name: "Alarm 03" },
-      { id: 4, name: "Alarm 04" },
-      { id: 5, name: "Alarm 05" },
-    ],
+    nearestMachine: [],
 
-    slug: [
-      { id: 1, name: "Slug 01" },
-      { id: 2, name: "Slug 02" },
-      { id: 3, name: "Slug 03" },
-      { id: 4, name: "Slug 04" },
-      { id: 5, name: "Slug 05" },
-    ],
+    id: 1,
 
     data: {
       // every input field, input name == state name
@@ -46,11 +30,67 @@ export class EditAlarm extends Form {
     nearest_machine_id: Joi.required(),
   });
 
+  componentDidMount = async () => {
+    try {
+      const id = this.props.match.params.id;
+      this.setState({ id });
+      const alarm_data = await AlarmService.getAlarmDetails(id);
+      const response = await MachineService.getAllMachines();
+      if (response.status === 200) {
+        if (response.data.code === 200) {
+          this.setState({
+            nearestMachine: response.data.data,
+            isRedirect: false,
+          });
+        } else {
+          this.setState({ isRedirect: true });
+        }
+      } else {
+        this.setState({ isRedirect: true });
+      }
+      if (alarm_data.status === 200) {
+        if (alarm_data.data.code === 200) {
+          const data = { ...this.state.data };
+          data.alarm_name = alarm_data.data.data.alarm_name;
+          data.slug = alarm_data.data.data.slug;
+          data.nearest_machine_id = alarm_data.data.data.nearest_machine.id;
+          this.setState({ data, isRedirect: false });
+        } else {
+          alert(alarm_data.data.data);
+          this.setState({ isRedirect: true });
+        }
+      } else {
+        this.setState({ isRedirect: true });
+      }
+    } catch (error) {
+      this.setState({ isRedirect: true });
+      toast.error("Error Occured!");
+    }
+  };
+
   doSubmit = async () => {
-    const { alarm_name, slug, nearest_machine_id } = this.state.data;
+    try {
+      const response = await AlarmService.editAlarm(
+        this.state.data,
+        this.state.id
+      );
+
+      if (response.status === 200) {
+        if (response.data.code === 200) {
+          toast.success(response.data.message);
+        } else {
+          toast.error(response.data.message);
+        }
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error("Error occured!");
+    }
   };
 
   render() {
+    if (this.state.isRedirect) return <Redirect to="/alarms/all-alarms" />;
     return (
       <div>
         <div>
@@ -62,15 +102,28 @@ export class EditAlarm extends Form {
               <h4>Edit Alarm</h4>
               <form>
                 <div className="form-group">
-                  {this.renderSelect(
+                  {this.renderInput(
                     "alarm_name",
                     "Alarm Name",
-                    this.state.alarmName,
-                    "name"
+                    "Enter Alarm Name",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
                   )}
                 </div>
                 <div className="form-group">
-                  {this.renderSelect("slug", "Slug", this.state.slug, "name")}
+                  {this.renderInput(
+                    "slug",
+                    "Slug",
+                    "Enter Slug",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  )}
                 </div>
                 <div className="form-group">
                   {this.renderSelect(

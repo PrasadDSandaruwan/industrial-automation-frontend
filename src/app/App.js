@@ -1,13 +1,14 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import "./App.scss";
-import AppRoutes from "./AppRoutes";
-import Header from "./shared/Header";
-import Footer from "./shared/Footer";
-import Auth from "../services/user/authService";
-import "./styleMachine.css";
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import './App.scss'
+import AppRoutes from './AppRoutes'
+import Header from './shared/Header'
+import Footer from './shared/Footer'
+import Auth from '../services/user/authService'
+import './styleMachine.css'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 class App extends Component {
   state = {};
@@ -21,6 +22,7 @@ class App extends Component {
       ""
     );
     let footerComponent = !this.state.isFullPageLayout ? <Footer /> : "";
+    
     return (
       <div>
         <ToastContainer/>
