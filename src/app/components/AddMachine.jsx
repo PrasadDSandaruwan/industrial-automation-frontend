@@ -27,7 +27,9 @@ export class AddMachine extends Form{
       name : '',
       slug : '',
       license_number : '',  
-      is_automated : 1
+      is_automated : 1,
+      temp : 0,
+      rate : 0,
 
     },
     errors : {},
@@ -41,6 +43,8 @@ export class AddMachine extends Form{
     slug : Joi.string().required(),
     license_number : Joi.string().required(),
     is_automated : Joi.number().required(),
+    temp : Joi.number().required(),
+    rate : Joi.number().required(),
   })
 
   componentDidMount = async () => {
@@ -57,8 +61,7 @@ export class AddMachine extends Form{
         } 
       }
     } catch (error) {
-      alert("Error occured!");
-      console.log("Error", error);
+      toast.error("Error Occured!")
     }
     
   };
@@ -76,7 +79,9 @@ export class AddMachine extends Form{
             name : '',
             slug : '',
             license_number : '',  
-            is_automated : 1
+            is_automated : 1,
+            temp : 0,
+            rate : 0,
           };
           this.setState({ data });
 
@@ -165,22 +170,39 @@ export class AddMachine extends Form{
         </div>
 
         <div className="form-group">
+          {this.renderInput(
+            'temp',
+            'Temp',
+            'Enter the Temp',
+            null,
+            null,
+            null,
+            null,
+            null,
+          )}
+        </div>
+
+        <div className="form-group">
+          {this.renderInput(
+            'rate',
+            'Rate',
+            'Enter the Rate',
+            null,
+            null,
+            null,
+            null,
+            null,
+          )}
+        </div>
+
+        <div className="form-group">
           {this.renderSelect(
               'is_automated',
               'Is Automated',
               this.state.isautomated,
               'name'
               )}
-          {/* {this.renderInput(
-            'isAutomated',
-            'Is Automated',
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-          )} */}
+
         </div>
 
 

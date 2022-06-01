@@ -4,7 +4,7 @@ import Joi from 'joi'
 import Form from './common/form'
 import MachineServices from '../../services/admin/machineService'
 import ProductionLineService from '../../services/admin/productionLineService';
-
+import { toast } from "react-toastify";
 
 export class EditMachine extends Form{
   state = {
@@ -29,7 +29,10 @@ export class EditMachine extends Form{
       name : '',
       slug : '',
       license_number : '',  
-      is_automated : 1
+      is_automated : 1,
+      rate : 0,
+      temp : 0
+
 
     },
     errors : {},
@@ -43,6 +46,8 @@ export class EditMachine extends Form{
     slug : Joi.string().required(),
     license_number : Joi.string().required(),
     is_automated : Joi.number().required(),
+    rate : Joi.number().required(),
+    temp : Joi.number().required()
   })
 
   componentDidMount = async () => {
@@ -51,7 +56,6 @@ export class EditMachine extends Form{
     const responseGetMachineTypes = await MachineServices.getMachineTypes();
     const responseGetProductionLine = await ProductionLineService.getProductionLinesID();
     const responseGetMachineDetails = await MachineServices.editMachineView(id); 
-    console.log("All machines details",responseGetMachineDetails.data.data);
     
     if (responseGetMachineTypes.status === 200 && responseGetProductionLine.status === 200 && responseGetMachineDetails.status === 200 ) {
       if (responseGetMachineTypes.data.code === 200 && responseGetProductionLine.data.code === 200 && responseGetMachineDetails.data.code === 200) {
@@ -62,13 +66,17 @@ export class EditMachine extends Form{
         data.slug = responseGetMachineDetails.data.data.slug;
         data.license_number = responseGetMachineDetails.data.data.license_number;
         data.is_automated = responseGetMachineDetails.data.data.is_automated;
+        data.rate = responseGetMachineDetails.data.data.rate;
+        data.temp = responseGetMachineDetails.data.data.temp;
         this.setState({ produtionline : responseGetProductionLine.data.data, machinetype : responseGetMachineTypes.data.data, isRedirect : false, data});
       
       } else {
-      this.setState({ isRedirect: true });
+        this.setState({ isRedirect: true });
+        toast.error("Error Occured!")
       }
     } else {
       this.setState({ isRedirect: true });
+      toast.error("Error Occured!")
     }
     
     
@@ -79,18 +87,18 @@ export class EditMachine extends Form{
   doSubmit = async () => {
     try {
       const response = await MachineServices.saveMachineView(this.state.data, this.state.id);
-      console.log("succesful");
+
       if (response.status === 200) {
         if (response.data.code === 200) {
 
-          alert(response.data.message);
+          toast.success(response.data.message);
         } else {
-          alert(response.data.message);
+          toast.error(response.data.message);
         }
       }
     } catch (error) {
       alert("Error occured!");
-      console.log("Error", error);
+
     }
   };
 
@@ -152,6 +160,32 @@ export class EditMachine extends Form{
             'license_number',
             'License Number',
             'Enter the License Number',
+            null,
+            null,
+            null,
+            null,
+            null,
+          )}
+        </div>
+
+        <div className="form-group">
+          {this.renderInput(
+            'temp',
+            'Temp',
+            'Enter the Temp',
+            null,
+            null,
+            null,
+            null,
+            null,
+          )}
+        </div>
+
+        <div className="form-group">
+          {this.renderInput(
+            'rate',
+            'Rate',
+            'Enter the Rate',
             null,
             null,
             null,
