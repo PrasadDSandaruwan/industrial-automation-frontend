@@ -109,6 +109,18 @@ export async function getPossibleConnectionIDs(id) {
   return response;
 }
 
+export async function getDemoDetails() {
+  console.log("Demo Details");
+
+  const apiEndPoint = apiUrl + "/v1/machine/get-by-line";
+  const response = await http.get(apiEndPoint, {
+    headers: { Authorization: `Bearer ${Auth.getJwt()}` },
+  });
+
+  console.log("Demo Details", response);
+  return response;
+}
+
 
 
 
@@ -121,5 +133,6 @@ export default {
   deleteMachine,
   addInitialRates,
   getPossibleConnectionIDs,
-  getRates
+  getRates,
+  getDemoDetails,
 };

@@ -17,83 +17,36 @@ export class AlarmDemo extends Form{
         id : 1,
         command : '',
         message : '',
-        type : 1,
+        type : '',
   
       },
       errors : {},
     }
   
-    //error handling
-    schema = Joi.object({
-      alarm_name : Joi.string().required(),
-      id: Joi.number().required(),
-      command : Joi.string().required(),
-      message : Joi.string().required(),
-      type : Joi.number().required(),
-    })
+    // //error handling
+    // schema = Joi.object({
+    //   alarm_name : Joi.string().required(),
+    //   id: Joi.number().required(),
+    //   command : Joi.string().required(),
+    //   message : Joi.string().required(),
+    //   type : Joi.number().required(),
+    // })
   
-    componentDidMount = async () => {
-      try {
-        const responseGetMachineTypes = await MachineService.getMachineTypes();
-        const responseGetProductionLine = await ProductionLineService.getProductionLinesID();
-        console.log("All machines Types", responseGetMachineTypes.data.data);
-        console.log("All production Lines", responseGetProductionLine.data.data);
-        if (responseGetMachineTypes.status === 200 && responseGetProductionLine.status === 200) {
-          if (responseGetMachineTypes.data.code === 200 && responseGetProductionLine.data.code === 200) {
-            this.setState({ produtionline : responseGetProductionLine.data.data, machinetype : responseGetMachineTypes.data.data });
-          } else {
-            toast.error("Error Occured!")
-          } 
-        }
-      } catch (error) {
-        toast.error("Error Occured!")
-      }
-      
+    componentDidMount = () => {
+      // const data = {...this.state.data};
+      const data = this.props
+      this.setState({data})
     };
   
-    doSubmit = async () => {
-      try {
-        const response = await MachineService.addMachine(this.state.data);
-  
-        if (response.status === 200) {
-          if (response.data.code === 200) {
-            const data = {
-              // every input field, input name == state name
-              alarm_name : '',
-              id : 1,
-              command : '',
-              message : '',
-              type : 1,
-        
-            };
-            this.setState({ data });
-  
-            toast.success(response.data.message);
-  
-          } else {
-            toast.error(response.data.message);
-          }
-        }
-      } catch (error) {
-        toast.error("Error Occured!")
-      }
-    };
+   
   
     render() {
       return(
-        <div className="adding">
-        <h2 className='py-3'>Add a New Machine</h2>
+        <div style={{width : "200px", height : "auto"}}>
+        <h2 className='py-3'>Alarm Demo</h2>
         
         <form action="#">
-          {/* <label>Machine type</label>
-          <select
-            value={type}
-            onChange = {(e) => setType(e.type.value)}
-          >
-            <option value="testing1">Testing1</option>
-            <option value="testing2">Testing2</option>
-          </select> */} 
-  
+
           <div className="form-group">
             {this.renderInput(
               'alarm_name',
@@ -145,7 +98,7 @@ export class AlarmDemo extends Form{
               null,
             )}
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             {this.renderInput(
               'type',
               'Alarm Type',
@@ -155,48 +108,8 @@ export class AlarmDemo extends Form{
               null,
               true,
               null,
-            )}
-          </div>
-
-            {/* {this.renderInput(
-              'isAutomated',
-              'Is Automated',
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
             )} */}
-  
-  
-          {/* <label>Production line</label>
-          <input
-            type="text"
-            required
-            value={productionLine}
-            onChange = {(e) => setLine(e.target.value)}
-          /> */}
-  
-          {/* <label>Machine name</label>
-          <input
-            type="text"
-            required
-            value={name}
-            onChange = {(e) => setName(e.target.value)}
-          /> */}
-  
-          {/* <label>Machine id</label>
-          <input
-            type="text"  
-            required
-            value={id}
-            onChange = {(e) => setId(e.target.value)}
-          />      */}
-  
-          {this.renderButton('Add Machine', 'Add Machine', null, null)}
-          {/* <button>Add Machine</button>    */}
-  
+          {/* </div> */}
         </form>
       </div>
       )

@@ -16,6 +16,7 @@ const Signin = lazy(() => import("./pages/Signin"));
 const ChangePassword = lazy(() => import("./pages/ChangePassword"));
 const Logout = lazy(() => import("../app/components/common/logout"));
 const AddMachine = lazy(() => import("../app/components/AddMachine"));
+const DemoPage =  lazy(() => import("../app/pages/DemoPage"));
 
 export class AppRoutes extends Component {
   render() {
@@ -45,6 +46,11 @@ export class AppRoutes extends Component {
             path="/notifications"
             component={Notifications}
           />
+
+          <Route path="/demo" component={DemoPage}>
+
+          </Route>
+
 
           <Route path="/">
             <Redirect to="/signin"></Redirect>
