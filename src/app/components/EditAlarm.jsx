@@ -94,10 +94,10 @@ export class EditAlarm extends Form {
     return (
       <div>
         <div>
-          <div className="az-signin-wrapper " style={{ minHeight: "600px" }}>
+          <div className="az-signin-wrapper " style={{ minHeight: "500px" }}>
             <div
               className="az-card-signin"
-              style={{ justifyItems: "normal", height: "450px" }}
+              style={{ justifyItems: "normal", height: "auto" }}
             >
               <h4>Edit Alarm</h4>
               <form>

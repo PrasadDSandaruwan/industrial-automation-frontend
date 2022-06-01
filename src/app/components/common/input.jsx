@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class Input extends Component {
   render() {
@@ -12,12 +12,12 @@ class Input extends Component {
       hideError = false,
       disabled,
       ...rest
-    } = this.props
+    } = this.props;
 
     return (
       <React.Fragment>
-        <div className="form-group">
-          <label htmlFor={name} className={classLabel ? classLabel : ''}>
+        <div>
+          <label htmlFor={name} className={classLabel ? classLabel : ""}>
             {label}
           </label>
         </div>
@@ -28,14 +28,14 @@ class Input extends Component {
           id={name}
           onChange={onChange}
           disabled={disabled}
-          className={classInput ? classInput : 'form-control'}
+          className={classInput ? classInput : "form-control"}
         />
         {error && !hideError && (
           <div className="alert alert-danger">{error}</div>
         )}
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default Input
+export default Input;

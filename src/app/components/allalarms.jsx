@@ -80,6 +80,7 @@ export class allalarms extends Component {
     return (
       <div className="allalarm">
         <h2>All Alarms</h2>
+        <hr class="style2" />
         <ViewAllTable
           columnNames={this.state.columnNames}
           tableData={this.state.tableData}
