@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import Joi from 'joi'
 import Form from './common/form'
 import ProductionLineService from '../../services/admin/productionLineService';
+import { toast } from "react-toastify";
 
 export class AddProductionline extends Form{
   state = {
@@ -33,14 +34,16 @@ export class AddProductionline extends Form{
           };
           this.setState({ data });
 
-          alert(response.data.message);
+          toast.success(response.data.message);
         } else {
-          alert(response.data.message);
+          toast.error(response.data.message);
         }
       }
+      else{
+        toast.error(response.data.message);
+      }
     } catch (error) {
-      alert("Error occured!");
-      console.log("Error", error);
+      toast.error("Error Occured!")
     }
   };
 

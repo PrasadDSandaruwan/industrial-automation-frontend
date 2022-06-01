@@ -86,14 +86,14 @@ export async function addInitialRates(data) {
 }
 
 export async function getRates(data) {
-  console.log("add Initial Rates", data);
+  console.log("in the get rates", data);
 
   const apiEndPoint = apiUrl + "/v1/connected-machine/rate";
   const response = await http.post(apiEndPoint, data, {
     headers: { Authorization: `Bearer ${Auth.getJwt()}` },
   });
 
-  console.log("add initial Rates", response);
+  console.log("at end in the get Rates", response);
   return response;
 }
 
