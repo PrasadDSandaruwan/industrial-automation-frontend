@@ -70,82 +70,98 @@ export class AddUser extends Form {
   };
 
   render() {
-    if(this.state.isRedirect) return <Redirect to="/dasboard"/>
+    if (this.state.isRedirect) return <Redirect to="/dasboard" />;
     return (
-      <div className="adding">
-        <h2>New User form</h2>
-        <form action="#">
-          <div className="form-group">
-            {this.renderInput(
-              "first_name",
-              "First Name",
-              "Enter first name",
-              null,
-              null,
-              null,
-              null,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "last_name",
-              "Last Name",
-              "Enter last name",
-              null,
-              null,
-              null,
-              null,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "email",
-              "Email",
-              "Enter email",
-              null,
-              null,
-              null,
-              null,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "nic",
-              "NIC",
-              "Enter NIC",
-              null,
-              null,
-              null,
-              null,
-              null
-            )}
-          </div>
+      <div>
+        <div>
+          <div className="az-signin-wrapper " style={{ minHeight: "500px" }}>
+            <div
+              className="az-card-signin"
+              style={{ justifyItems: "normal", height: "auto", width: "600px" }}
+            >
+              <h2>New User form</h2>
+              <form>
+                <div
+                  class="form-row"
+                  style={{ marginTop: "10px", marginBottom: "-10px" }}
+                >
+                  <div className="form-group col-md-6">
+                    {this.renderInput(
+                      "first_name",
+                      "First Name",
+                      "Enter first name",
+                      null,
+                      null,
+                      null,
+                      null,
+                      null
+                    )}
+                  </div>
+                  <div className="form-group col-md-6">
+                    {this.renderInput(
+                      "last_name",
+                      "Last Name",
+                      "Enter last name",
+                      null,
+                      null,
+                      null,
+                      null,
+                      null
+                    )}
+                  </div>
+                </div>
+                <div className="form-group">
+                  {this.renderInput(
+                    "email",
+                    "Email",
+                    "Enter email",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  )}
+                </div>
+                <div class="form-row">
+                  <div className="form-group col-md-6">
+                    {this.renderInput(
+                      "nic",
+                      "NIC",
+                      "Enter NIC",
+                      null,
+                      null,
+                      null,
+                      null,
+                      null
+                    )}
+                  </div>
 
-          <div className="form-group">
-            {this.renderInput(
-              "contact_no",
-              "Contact No",
-              "Enter contact no",
-              null,
-              null,
-              "tel",
-              null,
-              null
-            )}
+                  <div className="form-group col-md-6">
+                    {this.renderInput(
+                      "contact_no",
+                      "Contact No",
+                      "Enter contact no",
+                      null,
+                      null,
+                      "tel",
+                      null,
+                      null
+                    )}
+                  </div>
+                </div>
+                <div className="form-group">
+                  {this.renderSelect(
+                    "type_id",
+                    "Type Id",
+                    this.state.user_type,
+                    "user_type_name"
+                  )}
+                </div>
+                {this.renderButton("Add User", "Add User", null, null)}
+              </form>
+            </div>
           </div>
-          <div className="form-group">
-            {this.renderSelect(
-              "type_id",
-              "Type Id",
-              this.state.user_type,
-              "user_type_name"
-            )}
-          </div>
-          {this.renderButton("Add User", "Add User", null, null)}
-        </form>
+        </div>
       </div>
     );
   }

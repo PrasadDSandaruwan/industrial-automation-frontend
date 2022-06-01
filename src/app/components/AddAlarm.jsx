@@ -73,7 +73,7 @@ export class AddAlarm extends Form {
           <div className="az-signin-wrapper " style={{ minHeight: "500px" }}>
             <div
               className="az-card-signin"
-              style={{ justifyItems: "normal", height: "auto" }}
+              style={{ justifyItems: "normal", height: "auto", width: "600px" }}
             >
               <h4>Add Alarm</h4>
               <form>

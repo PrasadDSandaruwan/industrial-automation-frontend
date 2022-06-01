@@ -4,7 +4,6 @@ import Form from "../components/common/form";
 import userService from "../../services/user/userService";
 import { toast } from "react-toastify";
 
-
 export class ChangePassword extends Form {
   state = {
     data: {
@@ -13,7 +12,6 @@ export class ChangePassword extends Form {
       confirm_password: "",
     },
     errors: {}, // is A must
-
   };
 
   // error handlling
@@ -37,7 +35,6 @@ export class ChangePassword extends Form {
       } else {
         toast.error(response.data.message);
       }
-      
     } catch (ex) {
       toast.error("Error Occured!");
     }
@@ -45,51 +42,62 @@ export class ChangePassword extends Form {
 
   render() {
     return (
-      <div class="adding">
-        <h2>Enter New Password Here</h2>
-        <form>
-          <div className="form-group">
-            {this.renderInput(
-              "old_password",
-              "Old Password",
-              "Enter old password",
-              null,
-              null,
-              "password",
-              null,
-              null
-            )}
+      <div>
+        <div>
+          <div className="az-signin-wrapper " style={{ minHeight: "500px" }}>
+            <div
+              className="az-card-signin"
+              style={{ justifyItems: "normal", height: "auto", width: "600px" }}
+            >
+              <h4>Change Password</h4>
+              <form>
+                <div className="form-group">
+                  {this.renderInput(
+                    "old_password",
+                    "Old Password",
+                    "Enter old password",
+                    null,
+                    null,
+                    "password",
+                    null,
+                    null
+                  )}
+                </div>
+                <div className="form-group">
+                  {this.renderInput(
+                    "new_password",
+                    "New Password",
+                    "Enter your new password",
+                    null,
+                    null,
+                    "password",
+                    null,
+                    null
+                  )}
+                </div>
+                <div className="form-group">
+                  {this.renderInput(
+                    "confirm_password",
+                    "Confirm Password",
+                    "Confirm your password",
+                    null,
+                    null,
+                    "password",
+                    null,
+                    null
+                  )}
+                </div>
+                {this.renderButton(
+                  "Change Password",
+                  "Change Password",
+                  null,
+                  null
+                )}
+              </form>
+            </div>
           </div>
-          <div className="form-group">
-            {this.renderInput(
-              "new_password",
-              "New Password",
-              "Enter your new password",
-              null,
-              null,
-              "password",
-              null,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "confirm_password",
-              "Confirm Password",
-              "Confirm your password",
-              null,
-              null,
-              "password",
-              null,
-              null
-            )}
-          </div>
-          {this.renderButton("Change Password", "Change Password", null, null)}
-        </form>
+        </div>
       </div>
-      // </div>
-      // </div>
-      // </div>
     );
   }
 }
