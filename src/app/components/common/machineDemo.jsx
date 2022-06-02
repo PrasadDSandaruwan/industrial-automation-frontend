@@ -46,77 +46,90 @@ export class MachineDemo extends Form {
         <h2 className="py-3">Machine Demo</h2>
 
         <form action="#">
-          <div className="form-group">
-            {this.renderInput(
-              "name",
-              "Machine Name",
-              "",
-              null,
-              null,
-              null,
-              true,
-              null
-            )}
+          <div class="form-row">
+            <div className="form-group col-md-4">
+              {this.renderInput(
+                "id",
+                "Machine ID",
+                "",
+                null,
+                null,
+                null,
+                true,
+                null
+              )}
+            </div>
+            <div className="form-group col-md-8">
+              {this.renderInput(
+                "name",
+                "Machine Name",
+                "",
+                null,
+                null,
+                null,
+                true,
+                null
+              )}
+            </div>
           </div>
-          <div className="form-group">
-            {this.renderInput(
-              "id",
-              "Machine ID",
-              "",
-              null,
-              null,
-              null,
-              true,
-              null
-            )}
+          <div className="row">
+            <div className="row col-md-6 d-flex align-items-center justify-content-center">
+              <h6>Rate</h6>
+            </div>
+            <div className="col-md-6 d-flex align-items-center justify-content-center">
+              <h6>Temperature</h6>
+            </div>
           </div>
-          <div className="form-group">
-            {this.renderInput(
-              "init_rate",
-              "Initial Rate",
-              "",
-              null,
-              null,
-              null,
-              true,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "init_temp",
-              "Initial Temperature",
-              "",
-              null,
-              null,
-              null,
-              true,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "rate",
-              "Current Rate",
-              "",
-              null,
-              null,
-              null,
-              true,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "temp",
-              "Current Temperature",
-              "",
-              null,
-              null,
-              null,
-              true,
-              null
-            )}
+          <div class="form-row">
+            <div className="form-group col-md-3">
+              {this.renderInput(
+                "init_rate",
+                "Initial",
+                "",
+                null,
+                null,
+                null,
+                true,
+                null
+              )}
+            </div>
+            <div className="form-group col-md-3">
+              {this.renderInput(
+                "rate",
+                "Current",
+                "",
+                null,
+                null,
+                null,
+                true,
+                null
+              )}
+            </div>
+            <div className="form-group col-md-3">
+              {this.renderInput(
+                "init_temp",
+                "Initial",
+                "",
+                null,
+                null,
+                null,
+                true,
+                null
+              )}
+            </div>
+
+            <div className="form-group col-md-3">
+              {this.renderInput(
+                "temp",
+                "Current",
+                "",
+                null,
+                null,
+                null,
+                true,
+                null
+              )}
+            </div>
           </div>
           <div className="form-group">
             {this.renderInput(

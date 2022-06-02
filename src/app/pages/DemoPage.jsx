@@ -114,15 +114,15 @@ class DemoPage extends Component {
                           borderColor: "yellow",
                         }}
                       >
-                        <div className="row">
+                        <div>
                           {line.machine && (
-                            <div className="col">
+                            <div>
                               <MachineDemo {...line.machine}></MachineDemo>
                             </div>
                           )}
 
                           {line.alarm && Object.keys(line.alarm).length !== 0 && (
-                            <div className="col">
+                            <div>
                               <AlarmDemo {...line.alarm}></AlarmDemo>
                             </div>
                           )}
@@ -141,16 +141,16 @@ class DemoPage extends Component {
                             borderColor: "black",
                           }}
                         >
-                          <div className="row">
+                          <div>
                             {line.machine && (
-                              <div className="col">
+                              <div>
                                 <MachineDemo {...line.machine}></MachineDemo>
                               </div>
                             )}
 
                             {line.alarm &&
                               Object.keys(line.alarm).length !== 0 && (
-                                <div className="col">
+                                <div>
                                   <AlarmDemo {...line.alarm}></AlarmDemo>
                                 </div>
                               )}
@@ -167,15 +167,15 @@ class DemoPage extends Component {
                           borderColor: "red",
                         }}
                       >
-                        <div className="row">
+                        <div>
                           {line.machine && (
-                            <div className="col">
+                            <div>
                               <MachineDemo {...line.machine}></MachineDemo>
                             </div>
                           )}
 
                           {line.alarm && Object.keys(line.alarm).length !== 0 && (
-                            <div className="col">
+                            <div>
                               <AlarmDemo {...line.alarm}></AlarmDemo>
                             </div>
                           )}
@@ -192,15 +192,15 @@ class DemoPage extends Component {
                           borderColor: "green",
                         }}
                       >
-                        <div className="row">
+                        <div>
                           {line.machine && (
-                            <div className="col">
+                            <div>
                               <MachineDemo {...line.machine}></MachineDemo>
                             </div>
                           )}
 
                           {line.alarm && Object.keys(line.alarm).length !== 0 && (
-                            <div className="col">
+                            <div>
                               <AlarmDemo {...line.alarm}></AlarmDemo>
                             </div>
                           )}
