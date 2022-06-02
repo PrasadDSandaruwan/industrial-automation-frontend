@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Route,NavLink} from "react-router-dom";
+import React from "react";
+import { Route, NavLink } from "react-router-dom";
 import ChangePassword from "./ChangePassword";
 import UserProfile from "../components/userProfile";
 
@@ -16,10 +16,6 @@ function Profile() {
               <NavLink className="nav-link" to="/profile/change-password">
                 Change Password
               </NavLink>
-              
-              <NavLink className="nav-link" to="#/">
-                More
-              </NavLink>
             </nav>
           </div>
           <Route
@@ -32,8 +28,6 @@ function Profile() {
             path="/profile/change-password"
             component={ChangePassword}
           ></Route>
-          
-          
         </div>
       </div>
     </div>

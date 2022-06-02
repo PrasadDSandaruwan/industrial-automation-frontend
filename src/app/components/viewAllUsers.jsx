@@ -54,7 +54,7 @@ export class ViewAllUsers extends Component {
     if (result) {
       try {
         const response = await userService.deleteUser(id);
-        
+
         if (response.status === 200) {
           if (response.data.code === 200) {
             const data = [...this.state.tableData];
@@ -64,7 +64,7 @@ export class ViewAllUsers extends Component {
                 deleted.push(data[i]);
               }
             }
-            this.setState({ tableData: deleted});
+            this.setState({ tableData: deleted });
             toast.success(response.data.message);
           } else {
             toast.error(response.data.message);
@@ -79,10 +79,11 @@ export class ViewAllUsers extends Component {
   };
 
   render() {
-    if(this.state.isRedirect) return <Redirect to="/dasboard"/>
+    if (this.state.isRedirect) return <Redirect to="/dasboard" />;
     return (
-      <div className="allmachine">
-        <h2>All Machines</h2>
+      <div className="allusers">
+        <h2>All Users</h2>
+        <hr class="style2" />
         <ViewAllTable
           hide={true}
           columnNames={this.state.columnNames}

@@ -25,10 +25,10 @@ export class ForcePasswordChange extends Form {
   // must impliment this
   doSubmit = async () => {
     // const { password } = this.state.data;
-    console.log("inside do submit")
+    console.log("inside do submit");
     try {
       const response = await UserService.forceChangePassword(this.state.data);
-      console.log("response",response)
+      console.log("response", response);
       if (response.status === 200) {
         if (response.data.code === 200) {
           // this.setState({isRedirect:true})
@@ -36,52 +36,63 @@ export class ForcePasswordChange extends Form {
           Auth.setForcePassword("VERIFIED_USER");
           window.location = "/dasboard";
         } else {
-          
           toast.error(response.data.message);
         }
       } else {
-        
         toast.error(response.data.message);
       }
     } catch (ex) {
-      
       toast.error("Error Occured!");
     }
   };
 
   render() {
-    if (Auth.getForcePassword()==="VERIFIED_USER") return <Redirect to="/dasboard" />;
+    if (Auth.getForcePassword() === "VERIFIED_USER")
+      return <Redirect to="/dasboard" />;
     return (
-      <div class="adding">
-        <h2>Enter New Password Here</h2>
-
-        <form>
-          <div className="form-group">
-            {this.renderInput(
-              "new_password",
-              "New Password",
-              "Enter your password",
-              null,
-              null,
-              "password",
-              null,
-              null
-            )}
+      <div>
+        <div>
+          <div className="az-signin-wrapper " style={{ minHeight: "500px" }}>
+            <div
+              className="az-card-signin"
+              style={{ justifyItems: "normal", height: "auto", width: "600px" }}
+            >
+              <h4>Force Change Password</h4>
+              <form>
+                <div className="form-group">
+                  {this.renderInput(
+                    "new_password",
+                    "New Password",
+                    "Enter your password",
+                    null,
+                    null,
+                    "password",
+                    null,
+                    null
+                  )}
+                </div>
+                <div className="form-group">
+                  {this.renderInput(
+                    "confirm_password",
+                    "Confirm Password",
+                    "Enter confirm password",
+                    null,
+                    null,
+                    "password",
+                    null,
+                    null
+                  )}
+                </div>
+                {this.renderButton(
+                  "Change Password",
+                  "Change Password",
+                  null,
+                  null
+                )}
+              </form>
+            </div>
           </div>
-          <div className="form-group">
-            {this.renderInput(
-              "confirm_password",
-              "Confirm Password",
-              "Enter confirm password",
-              null,
-              null,
-              "password",
-              null,
-              null
-            )}
-          </div>
-          {this.renderButton("Change Password", "Change Password", null, null)}
-        </form>
+        </div>
       </div>
     );
   }

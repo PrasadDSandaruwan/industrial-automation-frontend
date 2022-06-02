@@ -98,85 +98,98 @@ export class UserProfile extends Form {
     if (this.state.isRedirect) return <Redirect to="/dasboard" />;
     return (
       <div>
-        <div className="adding">
-          <form action="#">
-            <fieldset disabled={!this.state.editable}>
-              <div className="form-group">
-                {this.renderInput(
-                  "first_name",
-                  "First Name",
-                  this.state.data.first_name,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null
-                )}
-              </div>
-              <div className="form-group">
-                {this.renderInput(
-                  "last_name",
-                  "Last Name",
-                  this.state.data.last_name,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null
-                )}
-              </div>
-              <fieldset disabled={true}>
-                <div className="form-group" s>
-                  {this.renderInput(
-                    "email",
-                    "Email",
-                    this.state.data.email,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null
-                  )}
-                </div>
+        <div>
+          <div className="az-signin-wrapper " style={{ minHeight: "500px" }}>
+            <div
+              className="az-card-signin"
+              style={{ justifyItems: "normal", height: "auto", width: "600px" }}
+            >
+              <h4>User Profile</h4>
+              <form>
+                <fieldset disabled={!this.state.editable}>
+                  <div className="form-group">
+                    {this.renderInput(
+                      "first_name",
+                      "First Name",
+                      this.state.data.first_name,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null
+                    )}
+                  </div>
+                  <div className="form-group">
+                    {this.renderInput(
+                      "last_name",
+                      "Last Name",
+                      this.state.data.last_name,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null
+                    )}
+                  </div>
+                  <fieldset disabled={true}>
+                    <div className="form-group" s>
+                      {this.renderInput(
+                        "email",
+                        "Email",
+                        this.state.data.email,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                      )}
+                    </div>
 
-                <div className="form-group">
-                  {this.renderInput(
-                    "nic",
-                    "NIC",
-                    this.state.data.nic,
-                    null,
-                    null,
-                    null,
+                    <div className="form-group">
+                      {this.renderInput(
+                        "nic",
+                        "NIC",
+                        this.state.data.nic,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                      )}
+                    </div>
+                  </fieldset>
+                  <div className="form-group">
+                    {this.renderInput(
+                      "contact_no",
+                      "Contact No",
+                      this.state.data.contact_no,
+                      null,
+                      null,
+                      "tel",
+                      null,
+                      null
+                    )}
+                  </div>
+                </fieldset>
+                <div hidden={!this.state.editable}>
+                  {this.renderButton(
+                    "Update Details",
+                    "Update Details",
                     null,
                     null
                   )}
                 </div>
-              </fieldset>
-              <div className="form-group">
-                {this.renderInput(
-                  "contact_no",
-                  "Contact No",
-                  this.state.data.contact_no,
-                  null,
-                  null,
-                  "tel",
-                  null,
-                  null
-                )}
-              </div>
-            </fieldset>
-            <div hidden={!this.state.editable}>
-              {this.renderButton(
-                "Update Details",
-                "Update Details",
-                null,
-                null
-              )}
+                <div hidden={this.state.editable}>
+                  <button
+                    className="btn btn-az-primary btn-block"
+                    onClick={this.myFunction}
+                  >
+                    Edit Details
+                  </button>
+                </div>
+              </form>
             </div>
-            <div hidden={this.state.editable}>
-              <button onClick={this.myFunction}>Edit Details</button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     );
