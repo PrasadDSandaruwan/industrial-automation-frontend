@@ -60,6 +60,8 @@ export async function deleteAlarm(id) {
   return response;
 }
 
+
+
 export default {
   addAlarm,
   getAlarmDetails,

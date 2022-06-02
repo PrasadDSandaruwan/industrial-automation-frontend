@@ -46,6 +46,7 @@ export class EditMachine extends Form {
   });
 
   componentDidMount = async () => {
+    try{
     const id = this.props.match.params.id;
     this.setState({ id });
     const responseGetMachineTypes = await MachineServices.getMachineTypes();
@@ -89,6 +90,11 @@ export class EditMachine extends Form {
       this.setState({ isRedirect: true });
       toast.error("Error Occured!");
     }
+
+  }catch (error) {
+    alert("Error occured!");
+  }
+
   };
 
   doSubmit = async () => {
