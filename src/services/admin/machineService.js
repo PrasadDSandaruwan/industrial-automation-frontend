@@ -109,6 +109,17 @@ export async function getPossibleConnectionIDs(id) {
   return response;
 }
 
+export async function getAllMachinesByType(data) {
+  console.log("add machine data");
+
+  const apiEndPoint = apiUrl + "/v1/machine/get-by-type/" + data;
+  const response = await http.get(apiEndPoint, {
+    headers: { Authorization: `Bearer ${Auth.getJwt()}` },
+  });
+
+  console.log("view machine", response);
+  return response;
+}
 
 
 
@@ -121,5 +132,6 @@ export default {
   deleteMachine,
   addInitialRates,
   getPossibleConnectionIDs,
-  getRates
+  getRates,
+  getAllMachinesByType
 };
