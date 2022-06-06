@@ -25,6 +25,22 @@ export class AddAlarm extends Form {
     nearest_machine_id: Joi.required(),
   });
 
+  handleSlug = async (slug) => {
+    try {
+      const response = await AlarmService.checkIsUnique(slug);
+      if (response.status === 200) {
+        if (response.data.code === 200) {
+          console.log("return true");
+          return true;
+        }
+        return false;
+      }
+      return false;
+    } catch (error) {
+      return false;
+    }
+  };
+
   componentDidMount = async () => {
     try {
       const response = await MachineService.getAllMachines();

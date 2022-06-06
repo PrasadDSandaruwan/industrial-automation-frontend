@@ -27,7 +27,7 @@ export class Header extends Component {
           <div className="container">
             <div className="az-header-left">
               <a href="#/" className="az-logo">
-                <span></span> InAuto
+                <span></span> Automated
               </a>
               <a
                 id="azMenuShow"
@@ -59,7 +59,7 @@ export class Header extends Component {
                       : "nav-item"
                   }
                 >
-                  <Link to="/dashboard" className="nav-link">
+                  <Link to="/dasboard/rate-of-production" className="nav-link">
                     Dashboard
                   </Link>
                 </li>
@@ -100,7 +100,10 @@ export class Header extends Component {
                         : "nav-item"
                     }
                   >
-                    <Link to="/usermanagement/view-all-users" className="nav-link">
+                    <Link
+                      to="/usermanagement/view-all-users"
+                      className="nav-link"
+                    >
                       User Management
                     </Link>
                   </li>
@@ -122,7 +125,10 @@ export class Header extends Component {
               </ul>
             </div>
             <div className="az-header-right">
-              <Dropdown className="az-header-notification">
+              <a href="/demo" class="btn btn-info" role="button">
+                Live Demo
+              </a>
+              {/* <Dropdown className="az-header-notification">
                 <Dropdown.Toggle as={"a"} className="new">
                   <i className="typcn typcn-bell"></i>
                 </Dropdown.Toggle>
@@ -161,7 +167,7 @@ export class Header extends Component {
                     <a href="#/">View All Notifications</a>
                   </div>
                 </Dropdown.Menu>
-              </Dropdown>
+              </Dropdown> */}
 
               <Dropdown className="az-profile-menu">
                 <Dropdown.Toggle as={"a"} className="az-img-user">

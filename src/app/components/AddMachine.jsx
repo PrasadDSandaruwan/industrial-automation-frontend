@@ -6,6 +6,7 @@ import Form from "./common/form";
 import MachineService from "../../services/admin/machineService";
 import ProductionLineService from "../../services/admin/productionLineService";
 import { toast } from "react-toastify";
+import machineService from "../../services/admin/machineService";
 
 export class AddMachine extends Form {
   state = {
@@ -69,6 +70,22 @@ export class AddMachine extends Form {
       }
     } catch (error) {
       toast.error("Error Occured!");
+    }
+  };
+
+  handleSlug = async (slug) => {
+    try {
+      const response = await machineService.checkIsUnique(slug);
+      if (response.status === 200) {
+        if (response.data.code === 200) {
+          console.log("return true");
+          return true;
+        }
+        return false;
+      }
+      return false;
+    } catch (error) {
+      return false;
     }
   };
 

@@ -21,6 +21,22 @@ export class AddProductionline extends Form {
     slug: Joi.string().required(),
   });
 
+  handleSlug = async (slug) => {
+    try {
+      const response = await ProductionLineService.checkIsUnique(slug);
+      if (response.status === 200) {
+        if (response.data.code === 200) {
+          console.log("return true");
+          return true;
+        }
+        return false;
+      }
+      return false;
+    } catch (error) {
+      return false;
+    }
+  };
+
   doSubmit = async () => {
     try {
       const response = await ProductionLineService.addProductionLine(

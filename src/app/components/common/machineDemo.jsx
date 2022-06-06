@@ -1,17 +1,5 @@
-//name
-//id
-//init_rate
-//init_temp
-//rate
-//temp
-//command
-//message
-
 import React from "react";
-import Joi from "joi";
 import Form from "./form";
-import machineService from "../../../services/admin/machineService";
-import { toast } from "react-toastify";
 
 export class MachineDemo extends Form {
   state = {
@@ -43,7 +31,9 @@ export class MachineDemo extends Form {
   render() {
     return (
       <div style={{ width: "auto", height: "auto" }}>
-        <h2 className="py-3">Machine Demo</h2>
+        <h2 className="row py-3 align-items-center justify-content-center">
+          Machine Demo
+        </h2>
 
         <form action="#">
           <div class="form-row">
