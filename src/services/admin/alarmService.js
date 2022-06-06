@@ -60,7 +60,17 @@ export async function deleteAlarm(id) {
   return response;
 }
 
+export async function checkIsUnique(slug) {
+  console.log("add machine data");
 
+  const apiEndPoint = apiUrl + "/v1/alarms/unique/" + slug;
+  const response = await http.get(apiEndPoint, {
+    headers: { Authorization: `Bearer ${Auth.getJwt()}` },
+  });
+
+  console.log("view machine", response);
+  return response;
+}
 
 export default {
   addAlarm,
@@ -68,4 +78,5 @@ export default {
   editAlarm,
   getAllAlarm,
   deleteAlarm,
+  checkIsUnique,
 };

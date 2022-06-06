@@ -36,9 +36,9 @@ export class EditInitialRates extends Component {
     try {
       const responseGetMachineIDs = await MachineService.getAllMachines();
 
-      const response_data = responseGetMachineIDs.data.data;
       if (responseGetMachineIDs.status === 200) {
         if (responseGetMachineIDs.data.code === 200) {
+          const response_data = responseGetMachineIDs.data.data;
           this.setState({ machines: response_data });
         } else {
           toast.error(responseGetMachineIDs.data.message);
@@ -61,7 +61,7 @@ export class EditInitialRates extends Component {
 
       if (response.status === 200) {
         if (response.data.code === 200) {
-          this.setState({ data, connectedMachines: response.data.data });
+          this.setState({ data, connectedMachines: response.data.data.data });
         } else {
           toast.error(response.data.message);
         }

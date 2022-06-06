@@ -45,56 +45,72 @@ export class EditMachine extends Form {
     temp: Joi.number().required(),
   });
 
-  componentDidMount = async () => {
-    try{
-    const id = this.props.match.params.id;
-    this.setState({ id });
-    const responseGetMachineTypes = await MachineServices.getMachineTypes();
-    const responseGetProductionLine =
-      await ProductionLineService.getProductionLinesID();
-    const responseGetMachineDetails = await MachineServices.editMachineView(id);
+  handleSlug = async (slug) => {
+    try {
+      const response = await MachineServices.checkIsUnique(slug);
+      if (response.status === 200) {
+        if (response.data.code === 200) {
+          console.log("return true");
+          return true;
+        }
+        return false;
+      }
+      return false;
+    } catch (error) {
+      return false;
+    }
+  };
 
-    if (
-      responseGetMachineTypes.status === 200 &&
-      responseGetProductionLine.status === 200 &&
-      responseGetMachineDetails.status === 200
-    ) {
+  componentDidMount = async () => {
+    try {
+      const id = this.props.match.params.id;
+      this.setState({ id });
+      const responseGetMachineTypes = await MachineServices.getMachineTypes();
+      const responseGetProductionLine =
+        await ProductionLineService.getProductionLinesID();
+      const responseGetMachineDetails = await MachineServices.editMachineView(
+        id
+      );
+
       if (
-        responseGetMachineTypes.data.code === 200 &&
-        responseGetProductionLine.data.code === 200 &&
-        responseGetMachineDetails.data.code === 200
+        responseGetMachineTypes.status === 200 &&
+        responseGetProductionLine.status === 200 &&
+        responseGetMachineDetails.status === 200
       ) {
-        const data = { ...this.data };
-        data.production_line_id =
-          responseGetMachineDetails.data.data.production_line.id;
-        data.machine_type_id =
-          responseGetMachineDetails.data.data.machine_type.id;
-        data.name = responseGetMachineDetails.data.data.name;
-        data.slug = responseGetMachineDetails.data.data.slug;
-        data.license_number =
-          responseGetMachineDetails.data.data.license_number;
-        data.is_automated = responseGetMachineDetails.data.data.is_automated;
-        data.rate = responseGetMachineDetails.data.data.rate;
-        data.temp = responseGetMachineDetails.data.data.temp;
-        this.setState({
-          produtionline: responseGetProductionLine.data.data,
-          machinetype: responseGetMachineTypes.data.data,
-          isRedirect: false,
-          data,
-        });
+        if (
+          responseGetMachineTypes.data.code === 200 &&
+          responseGetProductionLine.data.code === 200 &&
+          responseGetMachineDetails.data.code === 200
+        ) {
+          const data = { ...this.data };
+          data.production_line_id =
+            responseGetMachineDetails.data.data.production_line.id;
+          data.machine_type_id =
+            responseGetMachineDetails.data.data.machine_type.id;
+          data.name = responseGetMachineDetails.data.data.name;
+          data.slug = responseGetMachineDetails.data.data.slug;
+          data.license_number =
+            responseGetMachineDetails.data.data.license_number;
+          data.is_automated = responseGetMachineDetails.data.data.is_automated;
+          data.rate = responseGetMachineDetails.data.data.rate;
+          data.temp = responseGetMachineDetails.data.data.temp;
+          this.setState({
+            produtionline: responseGetProductionLine.data.data,
+            machinetype: responseGetMachineTypes.data.data,
+            isRedirect: false,
+            data,
+          });
+        } else {
+          this.setState({ isRedirect: true });
+          toast.error("Error Occured!");
+        }
       } else {
         this.setState({ isRedirect: true });
         toast.error("Error Occured!");
       }
-    } else {
-      this.setState({ isRedirect: true });
-      toast.error("Error Occured!");
+    } catch (error) {
+      alert("Error occured!");
     }
-
-  }catch (error) {
-    alert("Error occured!");
-  }
-
   };
 
   doSubmit = async () => {

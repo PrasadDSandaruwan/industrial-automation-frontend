@@ -4,17 +4,16 @@ import { apiUrl } from "../../config.json";
 import Auth from "../user/authService";
 
 export async function getProductionLinesID() {
-    console.log("production Line IDs");
-  
-    const apiEndPoint = apiUrl + "/v1/production-line/all";
-    const response = await http.get(apiEndPoint, {
-      headers: { Authorization: `Bearer ${Auth.getJwt()}` },
-    });
-  
-    console.log("Production Line IDs", response);
-    return response;
-}
+  console.log("production Line IDs");
 
+  const apiEndPoint = apiUrl + "/v1/production-line/all";
+  const response = await http.get(apiEndPoint, {
+    headers: { Authorization: `Bearer ${Auth.getJwt()}` },
+  });
+
+  console.log("Production Line IDs", response);
+  return response;
+}
 
 export async function addProductionLine(data) {
   console.log("add production Line", data);
@@ -27,11 +26,20 @@ export async function addProductionLine(data) {
   console.log("add production line", response);
   return response;
 }
+export async function checkIsUnique(slug) {
+  console.log("add machine data");
 
+  const apiEndPoint = apiUrl + "/v1/production-line/unique/" + slug;
+  const response = await http.get(apiEndPoint, {
+    headers: { Authorization: `Bearer ${Auth.getJwt()}` },
+  });
 
-  
+  console.log("view machine", response);
+  return response;
+}
 
-  export default {
-    getProductionLinesID,
-    addProductionLine
-  };
+export default {
+  getProductionLinesID,
+  addProductionLine,
+  checkIsUnique,
+};

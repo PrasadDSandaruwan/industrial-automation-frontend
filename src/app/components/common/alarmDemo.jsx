@@ -1,10 +1,5 @@
-//alarm_name, id, command, message, type
-
 import React from "react";
-import Joi from "joi";
 import Form from "./form";
-import machineService from "../../../services/admin/machineService";
-import { toast } from "react-toastify";
 
 export class AlarmDemo extends Form {
   state = {
@@ -31,7 +26,9 @@ export class AlarmDemo extends Form {
   render() {
     return (
       <div style={{ width: "auto", height: "auto" }}>
-        <h2 className="py-3">Alarm Demo</h2>
+        <h2 className="row py-3 align-items-center justify-content-center">
+          Alarm Demo
+        </h2>
 
         <form action="#">
           <div class="form-row">

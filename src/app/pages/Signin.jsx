@@ -69,7 +69,7 @@ export class Signin extends Form {
         <div className="az-signin-wrapper">
           <div className="az-card-signin">
             <h1 className="az-logo">
-              In<span>Auto</span>
+              Automated<span></span>
             </h1>
             <div className="az-signin-header">
               <h2>Welcome</h2>
