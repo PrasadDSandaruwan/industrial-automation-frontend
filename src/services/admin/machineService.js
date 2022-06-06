@@ -109,9 +109,21 @@ export async function getPossibleConnectionIDs(id) {
   return response
 }
 
+
+export async function getAllMachinesByType(data) {
+  console.log("add machine data");
+
+  const apiEndPoint = apiUrl + "/v1/machine/get-by-type/" + data;
+  const response = await http.get(apiEndPoint, {
+    headers: { Authorization: `Bearer ${Auth.getJwt()}` },
+  });
+
+  console.log("view machine", response);
+  return response;
+}
+
 export async function getDemoDetails() {
   console.log('Demo Details')
-
   const apiEndPoint = apiUrl + '/v1/machine/get-by-line'
   const response = await http.get(apiEndPoint, {
     headers: { Authorization: `Bearer ${Auth.getJwt()}` },
@@ -141,6 +153,8 @@ export default {
   addInitialRates,
   getPossibleConnectionIDs,
   getRates,
+  getAllMachinesByType,
   getDemoDetails,
   addRates,
 }
+

@@ -23,9 +23,9 @@ export class AppRoutes extends Component {
     return (
       <Suspense fallback="">
         <Switch>
-          <ProtectedRouteAdmin path="/machines" component={Machines} />
-          <ProtectedRouteAdmin path="/addMachine" component={AddMachine} />
-          <ProtectedRouteAdmin
+          <Route path="/machines" component={Machines} />
+          <Route path="/addMachine" component={AddMachine} />
+          <Route
             path="/addProductionline"
             component={AddProductionline}
           />
@@ -35,14 +35,16 @@ export class AppRoutes extends Component {
             path="/usermanagement"
             component={UserManagement}
           />
-          <ProtectedRoute path="/profile" component={Profile} />
+          <Route path="/profile" component={Profile} />
           <Route exact path="/signin" component={Signin} />
+
 
           <ProtectedRouteForcePassword path="/force-change-password" component={ForcePasswordChange} />
           <ProtectedRoute path="/dasboard" component={Dashboard} />
           <ProtectedRouteLogoutUser path="/logout" component={Logout} />
  
           <ProtectedRouteAdmin
+
             path="/notifications"
             component={Notifications}
           />
