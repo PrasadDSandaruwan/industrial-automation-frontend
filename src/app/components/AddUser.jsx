@@ -1,30 +1,27 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
-import Joi, { date } from "joi";
-import Auth from "../../services/user/authService";
+import Joi, { date, x } from "joi";
 import Form from "../components/common/form";
+import UserService from "../../services/user/userService";
+import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
 
 export class AddUser extends Form {
   state = {
     user_type: [
-      { id: 1, name: "testing 01" },
-      { id: 2, name: "testing 02" },
-      { id: 3, name: "testing 03" },
-      { id: 4, name: "testing 04" },
-      { id: 5, name: "testing 05" },
+      { id: 1, user_type_name: "Admin" },
+      { id: 2, user_type_name: "User" },
     ],
     data: {
-      // every input field, input name == state name
-
       first_name: "",
       last_name: "",
       email: "",
       nic: "",
-      birthDay: "",
-      contactNo: "",
-      userTypeId: 1,
+
+      contact_no: "",
+      type_id: 1,
     },
     errors: {}, // is A must
+    isRedirect: false,
   };
 
   // error handlling
@@ -33,152 +30,139 @@ export class AddUser extends Form {
       minDomainSegments: 2,
       tlds: { allow: ["com", "net"] },
     }), // email
-    firstName: Joi.string().required(), // string, required
-    lasttName: Joi.string().required(),
+    first_name: Joi.string().required(), // string, required
+    last_name: Joi.string().required(),
     nic: Joi.string().required(),
-    birthDay: Joi.date().required(),
-    contactNo: Joi.string(),
-    userTypeId: Joi.string().required(),
+
+    contact_no: Joi.string(),
+    type_id: Joi.number().required(),
   });
 
   // must impliment this
   doSubmit = async () => {
-    const {
-      userId,
-      email,
-      firstName,
-      lastName,
-      nic,
-      birthDay,
-      contactNo,
-      userTypeID,
-    } = this.state.data;
     try {
-      // const resposne = await Auth.login(username, password)
-      //   Auth.loginWithJwt(resposne.data.access_token, resposne.data.refresh_token)
-      //   window.location = '/dasboard'
+      const response = await UserService.addUser(this.state.data);
+
+      if (response.status === 200) {
+        if (response.data.code === 200) {
+          const data = {
+            first_name: "",
+            last_name: "",
+            email: "",
+            nic: "",
+            contact_no: "",
+            type_id: 1,
+          };
+          this.setState({ data });
+          toast.success(response.data.message);
+        } else {
+          this.setState({ isRedirect: false });
+          toast.error(response.data.message);
+        }
+      } else {
+        this.setState({ isRedirect: false });
+        toast.error(response.data.message);
+      }
     } catch (ex) {
-      //   console.log('in catch')
-      //   if (ex.response) {
-      //     const errors = { ...this.state.errors }
-      //     errors.username = ex.response.data.error_description
-      //     this.setState({
-      //       data: { username: '', password: '' },
-      //       errors,
-      //     })
-      // }
+      this.setState({ isRedirect: false });
+      toast.error("Error Occured!");
     }
   };
 
   render() {
-    //
-    // if (Auth.getCurrentUser()) return <Redirect to="/dasboard" />
-
+    if (this.state.isRedirect) return <Redirect to="/dasboard" />;
     return (
-      <div className="adding">
-        <h2>New User form</h2>
-        {/* <div className="az-signin-header"> */}
-        {/* <h2>Welcome</h2> */}
-        {/* <h4>Please sign in to continue</h4> */}
-        <form action="#">
-          <div className="form-group">
-            {this.renderInput(
-              "userId",
-              "User Id",
-              "Enter user id",
-              null,
-              null,
-              null,
-              null,
-              null
-            )}
+      <div>
+        <div>
+          <div className="az-signin-wrapper " style={{ minHeight: "500px" }}>
+            <div
+              className="az-card-signin"
+              style={{ justifyItems: "normal", height: "auto", width: "600px" }}
+            >
+              <h2>New User form</h2>
+              <form>
+                <div
+                  class="form-row"
+                  style={{ marginTop: "10px", marginBottom: "-10px" }}
+                >
+                  <div className="form-group col-md-6">
+                    {this.renderInput(
+                      "first_name",
+                      "First Name",
+                      "Enter first name",
+                      null,
+                      null,
+                      null,
+                      null,
+                      null
+                    )}
+                  </div>
+                  <div className="form-group col-md-6">
+                    {this.renderInput(
+                      "last_name",
+                      "Last Name",
+                      "Enter last name",
+                      null,
+                      null,
+                      null,
+                      null,
+                      null
+                    )}
+                  </div>
+                </div>
+                <div className="form-group">
+                  {this.renderInput(
+                    "email",
+                    "Email",
+                    "Enter email",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  )}
+                </div>
+                <div class="form-row">
+                  <div className="form-group col-md-6">
+                    {this.renderInput(
+                      "nic",
+                      "NIC",
+                      "Enter NIC",
+                      null,
+                      null,
+                      null,
+                      null,
+                      null
+                    )}
+                  </div>
+
+                  <div className="form-group col-md-6">
+                    {this.renderInput(
+                      "contact_no",
+                      "Contact No",
+                      "Enter contact no",
+                      null,
+                      null,
+                      "tel",
+                      null,
+                      null
+                    )}
+                  </div>
+                </div>
+                <div className="form-group">
+                  {this.renderSelect(
+                    "type_id",
+                    "Type Id",
+                    this.state.user_type,
+                    "user_type_name"
+                  )}
+                </div>
+                {this.renderButton("Add User", "Add User", null, null)}
+              </form>
+            </div>
           </div>
-          <div className="form-group">
-            {this.renderInput(
-              "firstName",
-              "First Name",
-              "Enter first name",
-              null,
-              null,
-              null,
-              null,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "lastName",
-              "Last Name",
-              "Enter last name",
-              null,
-              null,
-              null,
-              null,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "email",
-              "Email",
-              "Enter email",
-              null,
-              null,
-              null,
-              null,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "nic",
-              "NIC",
-              "Enter NIC",
-              null,
-              null,
-              null,
-              null,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "birthDay",
-              "Birth Day",
-              "Enter birth day",
-              null,
-              null,
-              "date",
-              null,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderInput(
-              "contactNo",
-              "Contact No",
-              "Enter contact no",
-              null,
-              null,
-              "tel",
-              null,
-              null
-            )}
-          </div>
-          <div className="form-group">
-            {this.renderSelect(
-              "userTypeId",
-              "User Type Id",
-              this.state.user_type,
-              'name'
-            )}
-          </div>
-          {this.renderButton("Add User", "Add User", null, null)}
-        </form>
+        </div>
       </div>
-      //   </div>
-      // </div>
-      //   </div>
     );
   }
 }

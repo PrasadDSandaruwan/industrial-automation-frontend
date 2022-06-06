@@ -72,7 +72,7 @@ export class Header extends Component {
                         : "nav-item"
                     }
                   >
-                    <Link to="/machines" className="nav-link">
+                    <Link to="/machines/view-all-machines" className="nav-link">
                       Machines
                     </Link>
                   </li>
@@ -106,7 +106,7 @@ export class Header extends Component {
                   </li>
                 )}
 
-                {user && user.authorities[0] === "ADMIN" && (
+                {/* {user && user.authorities[0] === "ADMIN" && (
                   <li
                     className={
                       this.isPathActive("/notifications")
@@ -118,7 +118,7 @@ export class Header extends Component {
                       Notifications
                     </Link>
                   </li>
-                )}
+                )} */}
               </ul>
             </div>
             <div className="az-header-right">
@@ -191,10 +191,10 @@ export class Header extends Component {
                     <span>Position</span>
                   </div>
 
-                  <Link to="/Profile" className="dropdown-item">
+                  <Link to="/profile/user-profile" className="dropdown-item">
                     <i className="typcn typcn-user-outline"></i> My Profile
                   </Link>
-                  <Link to="/Profile" className="dropdown-item">
+                  <Link to="/profile/user-profile" className="dropdown-item">
                     <i className="typcn typcn-edit"></i> Edit Profile
                   </Link>
                   <Link to="/logout" className="dropdown-item">
