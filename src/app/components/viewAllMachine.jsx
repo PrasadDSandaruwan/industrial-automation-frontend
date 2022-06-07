@@ -84,7 +84,8 @@ export class ViewAllMachine extends Component {
   };
 
   render() {
-    if (this.state.isRedirect) return <Redirect to="/dasboard" />;
+    if (this.state.isRedirect)
+      return <Redirect to="/dasboard/rate-of-production" />;
     return (
       <div className="allmachines">
         <h2>All Machines</h2>

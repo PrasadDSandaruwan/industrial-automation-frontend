@@ -10,7 +10,7 @@ export default class RateOfIngredients extends Component {
     machines: [],
 
     data: {
-      machine_id: 1,
+      machine_id: "",
       is_temp: 0,
     },
 

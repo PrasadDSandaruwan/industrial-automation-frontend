@@ -30,7 +30,7 @@ export class ForcePasswordChange extends Form {
         if (response.data.code === 200) {
           toast.success(response.data.message);
           Auth.setForcePassword("VERIFIED_USER");
-          window.location = "/dasboard";
+          window.location = "/dasboard/rate-of-production";
         } else {
           toast.error(response.data.message);
         }
@@ -44,7 +44,7 @@ export class ForcePasswordChange extends Form {
 
   render() {
     if (Auth.getForcePassword() === "VERIFIED_USER")
-      return <Redirect to="/dasboard" />;
+      return <Redirect to="/dasboard/rate-of-production" />;
     return (
       <div>
         <div>

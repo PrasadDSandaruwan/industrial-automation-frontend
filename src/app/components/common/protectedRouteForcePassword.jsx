@@ -27,7 +27,7 @@ const ProtectedRouteForcePassword = ({
           return (
             <Redirect
               to={{
-                pathname: "/dasboard",
+                pathname: "/dasboard/rate-of-production",
                 state: { from: props.location },
               }}
             />

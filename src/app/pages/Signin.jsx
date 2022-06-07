@@ -40,7 +40,7 @@ export class Signin extends Form {
             this.setState({ forceChange: true });
             window.location = "/force-change-password";
           } else {
-            window.location = "/dasboard";
+            window.location = "/dasboard/rate-of-production";
           }
         }
       }
@@ -58,7 +58,8 @@ export class Signin extends Form {
   };
 
   render() {
-    if (Auth.getCurrentUser()) return <Redirect to="/dasboard" />;
+    if (Auth.getCurrentUser())
+      return <Redirect to="/dasboard/rate-of-production" />;
 
     return (
       <div>

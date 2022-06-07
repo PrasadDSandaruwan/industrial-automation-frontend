@@ -1,6 +1,6 @@
-import React from 'react'
-import { Redirect, Route } from 'react-router-dom'
-import Auth from '../../../services/user/authService'
+import React from "react";
+import { Redirect, Route } from "react-router-dom";
+import Auth from "../../../services/user/authService";
 
 const ProtectedRouteAdmin = ({
   path,
@@ -18,36 +18,36 @@ const ProtectedRouteAdmin = ({
           return (
             <Redirect
               to={{
-                pathname: '/signin',
+                pathname: "/signin",
                 state: { from: props.location },
               }}
             />
-          )
-        } else if (Auth.getUserRole() !== 'ADMIN') {
+          );
+        } else if (Auth.getUserRole() !== "ADMIN") {
           return (
             <Redirect
               to={{
-                pathname: '/dasboard',
+                pathname: "/dasboard/rate-of-production",
                 state: { from: props.location },
               }}
             />
-          )
+          );
         }
 
-        if (Auth.getForcePassword()==="FORCE_PASSWORD_CHANGE_PENDING")
-        return (
-          <Redirect
-            to={{
-              pathname: "/force-change-password",
-              state: { from: props.location },
-            }}
-          />
-        )
+        if (Auth.getForcePassword() === "FORCE_PASSWORD_CHANGE_PENDING")
+          return (
+            <Redirect
+              to={{
+                pathname: "/force-change-password",
+                state: { from: props.location },
+              }}
+            />
+          );
 
-        return Component ? <Component {...props} /> : render(props)
+        return Component ? <Component {...props} /> : render(props);
       }}
     />
-  )
-}
+  );
+};
 
-export default ProtectedRouteAdmin
+export default ProtectedRouteAdmin;

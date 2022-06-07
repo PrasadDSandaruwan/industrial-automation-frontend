@@ -83,7 +83,8 @@ export class AddUser extends Form {
   };
 
   render() {
-    if (this.state.isRedirect) return <Redirect to="/dasboard" />;
+    if (this.state.isRedirect)
+      return <Redirect to="/dasboard/rate-of-production" />;
     return (
       <div>
         <div>
