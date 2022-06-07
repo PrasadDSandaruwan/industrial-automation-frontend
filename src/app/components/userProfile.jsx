@@ -1,37 +1,37 @@
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
-import Joi, { date } from "joi";
-import UserService from "../../services/user/userService";
-import Form from "../components/common/form";
-import userService from "../../services/user/userService";
-import { toast } from "react-toastify";
-import { Redirect } from "react-router-dom";
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import Joi, { date } from 'joi'
+import UserService from '../../services/user/userService'
+import Form from '../components/common/form'
+import userService from '../../services/user/userService'
+import { toast } from 'react-toastify'
+import { Redirect } from 'react-router-dom'
 
 export class UserProfile extends Form {
   state = {
     user_type: [
-      { id: 1, user_type_name: "Admin" },
-      { id: 2, user_type_name: "User" },
+      { id: 1, user_type_name: 'Admin' },
+      { id: 2, user_type_name: 'User' },
     ],
     data: {
-      first_name: "",
-      last_name: "",
-      birthday: "2022-12-12",
-      email: "",
-      nic: "",
-      contact_no: "",
+      first_name: '',
+      last_name: '',
+      birthday: '2022-12-12',
+      email: '',
+      nic: '',
+      contact_no: '',
     },
     errors: {}, // is A must
     editable: false,
     user_data: [],
     isRedirect: false,
-  };
+  }
 
   // error handlling
   schema = Joi.object({
     email: Joi.string().email({
       minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
+      tlds: { allow: ['com', 'net'] },
     }), // email
     first_name: Joi.string().required(), // string, required
     last_name: Joi.string().required(),
@@ -39,11 +39,11 @@ export class UserProfile extends Form {
 
     contact_no: Joi.string(),
     // type_id: Joi.number().required(),
-  });
+  })
 
   componentDidMount = async () => {
     try {
-      const response = await userService.getUserDetails();
+      const response = await userService.getUserDetails()
 
       if (response.status === 200) {
         if (response.data.code === 200) {
@@ -53,130 +53,133 @@ export class UserProfile extends Form {
             email: response.data.data.email,
             nic: response.data.data.nic,
             contact_no: response.data.data.contact_no,
-          };
-          this.setState({ data });
+          }
+          this.setState({ data })
         } else {
-          this.setState({ isRedirect: true });
-          toast.error(response.data.message);
+          this.setState({ isRedirect: true })
+          toast.error(response.data.message)
         }
       } else {
-        this.setState({ isRedirect: true });
-        toast.error(response.data.message);
+        this.setState({ isRedirect: true })
+        toast.error(response.data.message)
       }
     } catch (ex) {
-      this.setState({ isRedirect: true });
-      toast.error("Error Occured!");
+      this.setState({ isRedirect: true })
+      toast.error('Error Occured!')
     }
-  };
+  }
+  checkUse = async (data) => {
+    return true
+  }
 
   // must impliment this
   doSubmit = async () => {
     try {
-      const response = await UserService.updateUserProfile(this.state.data);
+      const response = await UserService.updateUserProfile(this.state.data)
 
       if (response.status === 200) {
         if (response.data.code === 200) {
-          this.setState({ editable: false });
-          toast.success(response.data.message);
+          this.setState({ editable: false })
+          toast.success(response.data.message)
         } else {
-          toast.error(response.data.message);
+          toast.error(response.data.message)
         }
       } else {
-        toast.error(response.data.message);
+        toast.error(response.data.message)
       }
     } catch (ex) {
-      toast.error("Error Occured!");
+      toast.error('Error Occured!')
     }
-  };
+  }
 
   myFunction = (event) => {
-    event.preventDefault();
-    this.setState({ editable: true });
-  };
+    event.preventDefault()
+    this.setState({ editable: true })
+  }
 
   render() {
-    if (this.state.isRedirect) return <Redirect to="/dasboard" />;
+    if (this.state.isRedirect) return <Redirect to="/dasboard" />
     return (
       <div>
         <div>
-          <div className="az-signin-wrapper " style={{ minHeight: "500px" }}>
+          <div className="az-signin-wrapper " style={{ minHeight: '500px' }}>
             <div
               className="az-card-signin"
-              style={{ justifyItems: "normal", height: "auto", width: "600px" }}
+              style={{ justifyItems: 'normal', height: 'auto', width: '600px' }}
             >
               <h4>User Profile</h4>
               <form>
                 <fieldset disabled={!this.state.editable}>
                   <div className="form-group">
                     {this.renderInput(
-                      "first_name",
-                      "First Name",
+                      'first_name',
+                      'First Name',
                       this.state.data.first_name,
                       null,
                       null,
                       null,
                       null,
-                      null
+                      null,
                     )}
                   </div>
                   <div className="form-group">
                     {this.renderInput(
-                      "last_name",
-                      "Last Name",
+                      'last_name',
+                      'Last Name',
                       this.state.data.last_name,
                       null,
                       null,
                       null,
                       null,
-                      null
+                      null,
                     )}
                   </div>
                   <fieldset disabled={true}>
                     <div className="form-group" s>
                       {this.renderInput(
-                        "email",
-                        "Email",
+                        'email',
+                        'Email',
                         this.state.data.email,
                         null,
                         null,
                         null,
                         null,
-                        null
+                        null,
                       )}
                     </div>
 
                     <div className="form-group">
                       {this.renderInput(
-                        "nic",
-                        "NIC",
+                        'nic',
+                        'NIC',
                         this.state.data.nic,
                         null,
                         null,
                         null,
                         null,
-                        null
+                        null,
                       )}
                     </div>
                   </fieldset>
                   <div className="form-group">
                     {this.renderInput(
-                      "contact_no",
-                      "Contact No",
+                      'contact_no',
+                      'Contact No',
                       this.state.data.contact_no,
                       null,
                       null,
-                      "tel",
+                      'tel',
                       null,
-                      null
+                      null,
                     )}
                   </div>
                 </fieldset>
                 <div hidden={!this.state.editable}>
                   {this.renderButton(
-                    "Update Details",
-                    "Update Details",
+                    'Update Details',
+                    'Update Details',
                     null,
-                    null
+                    null,
                   )}
                 </div>
                 <div hidden={this.state.editable}>
@@ -192,8 +195,8 @@ export class UserProfile extends Form {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default UserProfile;
+export default UserProfile

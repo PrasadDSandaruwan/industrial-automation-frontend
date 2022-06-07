@@ -3,73 +3,87 @@ import { Line } from 'react-chartjs-2'
 
 const properties = {
   scales: {
-    yAxes: [{
-      display: true,
-      gridLines: {
-        drawBorder: true,
+    yAxes: [
+      {
         display: true,
-        drawTicks: true,
-        color: '#eef0fa',
-        zeroLineColor: 'rgba(90, 113, 208, 0)',
+        gridLines: {
+          drawBorder: true,
+          display: true,
+          drawTicks: true,
+          color: '#eef0fa',
+          zeroLineColor: 'rgba(90, 113, 208, 0)',
+        },
+        ticks: {
+          display: true,
+          beginAtZero: true,
+          min: 0,
+          max: 100,
+          stepSize: 22,
+          padding: 10,
+        },
       },
-      ticks: {
+    ],
+    xAxes: [
+      {
         display: true,
-        beginAtZero: true,
-        min: 0,
-        max: 100,
-        stepSize: 22,
-        padding: 10,
-      }
-    }],
-    xAxes: [{
-      display: true,
-      position: 'bottom',
-      gridLines: {
-        drawBorder: true,
-        display: true,
-        drawTicks: true,
+        position: 'bottom',
+        gridLines: {
+          drawBorder: true,
+          display: true,
+          drawTicks: true,
+        },
+        ticks: {
+          beginAtZero: true,
+          stepSize: 10,
+          fontColor: '#a7afb7',
+          padding: 10,
+        },
       },
-      ticks: {
-        beginAtZero: true,
-        stepSize: 10,
-        fontColor: "#a7afb7",
-        padding: 10,
-      }
-    }],
+    ],
   },
   legend: {
     display: true,
   },
   elements: {
     point: {
-      radius: 0
+      radius: 0,
     },
     line: {
-      tension: 0
-    }
+      tension: 0,
+    },
   },
   tooltips: {
     backgroundColor: 'rgba(2, 171, 254, 1)',
   },
-};
+}
 
 class Chart extends Component {
   state = {
-    title: "",
+    title: '',
     machineId: 1,
     rate: {
       labels: [],
-      datasets: []
-    }
+      datasets: [],
+    },
   }
 
   componentDidMount() {
-    const{
-      title, machineId, labels, datasets
-    } = this.props
-    const rate = {labels:labels, datasets: datasets}
+    const { title, machineId, labels, datasets } = this.props
+    const rate = { labels: labels, datasets: datasets }
     this.setState({
-      title, rate, machineId
+      title,
+      rate,
+      machineId,
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { title, machineId, labels, datasets } = nextProps
+    const rate = { labels: labels, datasets: datasets }
+    this.setState({
+      title,
+      rate,
+      machineId,
     })
   }
 
@@ -77,7 +91,7 @@ class Chart extends Component {
     return (
       <div className="card card-dashboard-one">
         <div className="card-header d-flex justify-content-center">
-            <h5>{this.state.title}</h5>
+          <h5>{this.state.title}</h5>
         </div>
         <div className="card-body">
           <div className="page-view-chart-wrapper">
@@ -87,7 +101,6 @@ class Chart extends Component {
       </div>
     )
   }
-
 }
 
 export default Chart
