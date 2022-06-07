@@ -1,0 +1,5 @@
+{
+  "apiUrl": "https://industrial-automation-backend.herokuapp.com",
+  "auth_username": "clientId",
+  "auth_password": "clientSecret"
+}
