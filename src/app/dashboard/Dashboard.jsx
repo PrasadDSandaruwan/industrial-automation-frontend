@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { NavLink, Route } from "react-router-dom";
-import { Line, Bar, Pie } from "react-chartjs-2";
-import Chart from "../charts/Chart";
+import React, { Component } from 'react'
+import { NavLink, Route, Router, Switch } from 'react-router-dom'
+import { Line, Bar, Pie } from 'react-chartjs-2'
+import Chart from '../charts/Chart'
 
-import RateOfProduction from "../pages/RateOfProduction";
-import RateOfIngredients from "../pages/RateOfIngredients";
-import RateOfFinalProduct from "../pages/RateOfFinalProduct";
-import Temperature from "../pages/Temperature";
-import RemainingIngredientAmount from "../pages/RemainingIngredientAmount";
+import RateOfProduction from '../pages/RateOfProduction'
+import RateOfIngredients from '../pages/RateOfIngredients'
+import RateOfFinalProduct from '../pages/RateOfFinalProduct'
+import Temperature from '../pages/Temperature'
+import RemainingIngredientAmount from '../pages/RemainingIngredientAmount'
 
 export class Dashboard extends Component {
   render() {
@@ -26,12 +26,12 @@ export class Dashboard extends Component {
                 >
                   Rate of Ingredients
                 </NavLink>
-                <NavLink
+                {/* <NavLink
                   className="nav-link"
                   to="/dasboard/rate-of-final-product"
                 >
                   Final Production
-                </NavLink>
+                </NavLink> */}
                 <NavLink className="nav-link" to="/dasboard/temperature">
                   Temperature
                 </NavLink>
@@ -39,10 +39,11 @@ export class Dashboard extends Component {
                   className="nav-link"
                   to="/dasboard/remaining-ingredient-amount"
                 >
-                  Remaining Ingredients
+                  Final Production Output
                 </NavLink>
               </nav>
             </div>
+
             <Route
               exact
               path="/dasboard/rate-of-production"
@@ -53,11 +54,11 @@ export class Dashboard extends Component {
               path="/dasboard/rate-of-ingredients"
               component={RateOfIngredients}
             ></Route>
-            <Route
+            {/* <Route
               exact
               path="/dasboard/rate-of-final-product"
               component={RateOfFinalProduct}
-            ></Route>
+            ></Route> */}
             <Route
               exact
               path="/dasboard/temperature"
@@ -72,8 +73,8 @@ export class Dashboard extends Component {
           {/* az-content-body */}
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Dashboard;
+export default Dashboard
