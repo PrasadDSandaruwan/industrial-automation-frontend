@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import ViewAllTable from "../components/common/viewAllTable";
-import EditMachine from "../components/EditMachine";
-import { Route } from "react-router-dom";
 import MachineService from "../../services/admin/machineService";
 import { Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -29,7 +27,7 @@ export class ViewAllMachine extends Component {
       if (response.status === 200) {
         if (response.data.code === 200) {
           const tableData = [];
-          console.log(response.data.data);
+
           const response_data = response.data.data;
 
           if (response_data.length > 0) {

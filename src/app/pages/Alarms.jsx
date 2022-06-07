@@ -17,10 +17,6 @@ function Alarms() {
               <NavLink className="nav-link " to="/alarms/add-alarm">
                 Add Alarm
               </NavLink>
-
-              {/* <NavLink className="nav-link" to="#/">
-                More
-              </NavLink> */}
             </nav>
           </div>
           <Route exact path="/alarms/all-alarms" component={AllAlarm} />

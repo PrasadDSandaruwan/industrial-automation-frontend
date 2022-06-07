@@ -1,7 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import Joi from "joi";
-import Auth from "../../services/user/authService";
 import Form from "./common/form";
 import MachineService from "../../services/admin/machineService";
 import ProductionLineService from "../../services/admin/productionLineService";
@@ -20,7 +18,6 @@ export class AddMachine extends Form {
     ],
 
     data: {
-      //every input field name == state name
       production_line_id: 1,
       machine_type_id: 2,
       name: "",
@@ -33,7 +30,6 @@ export class AddMachine extends Form {
     errors: {},
   };
 
-  //error handling
   schema = Joi.object({
     production_line_id: Joi.number().required(),
     machine_type_id: Joi.number().required(),
@@ -50,8 +46,7 @@ export class AddMachine extends Form {
       const responseGetMachineTypes = await MachineService.getMachineTypes();
       const responseGetProductionLine =
         await ProductionLineService.getProductionLinesID();
-      console.log("All machines Types", responseGetMachineTypes.data.data);
-      console.log("All production Lines", responseGetProductionLine.data.data);
+
       if (
         responseGetMachineTypes.status === 200 &&
         responseGetProductionLine.status === 200
@@ -78,7 +73,6 @@ export class AddMachine extends Form {
       const response = await machineService.checkIsUnique(slug);
       if (response.status === 200) {
         if (response.data.code === 200) {
-          console.log("return true");
           return true;
         }
         return false;
@@ -96,7 +90,6 @@ export class AddMachine extends Form {
       if (response.status === 200) {
         if (response.data.code === 200) {
           const data = {
-            // every input field, input name == state name
             production_line_id: 1,
             machine_type_id: 2,
             name: "",
@@ -228,7 +221,6 @@ export class AddMachine extends Form {
                 </div>
 
                 {this.renderButton("Add Machine", "Add Machine", null, null)}
-                {/* <button>Add Machine</button>    */}
               </form>
             </div>
           </div>

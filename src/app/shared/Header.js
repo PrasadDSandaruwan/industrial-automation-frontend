@@ -1,26 +1,26 @@
-import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import { Dropdown } from 'react-bootstrap'
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
 
 export class Header extends Component {
   closeMenu(e) {
-    e.target.closest('.dropdown').classList.remove('show')
-    e.target.closest('.dropdown .dropdown-menu').classList.remove('show')
+    e.target.closest(".dropdown").classList.remove("show");
+    e.target.closest(".dropdown .dropdown-menu").classList.remove("show");
   }
 
   toggleHeaderMenu(e) {
-    e.preventDefault()
-    document.querySelector('body').classList.toggle('az-header-menu-show')
+    e.preventDefault();
+    document.querySelector("body").classList.toggle("az-header-menu-show");
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
-      document.querySelector('body').classList.remove('az-header-menu-show')
+      document.querySelector("body").classList.remove("az-header-menu-show");
     }
   }
 
   render() {
-    const { user } = this.props
+    const { user } = this.props;
     return (
       <div>
         <div className="az-header">
@@ -54,9 +54,9 @@ export class Header extends Component {
               <ul className="nav">
                 <li
                   className={
-                    this.isPathActive('/dashboard')
-                      ? 'nav-item active'
-                      : 'nav-item'
+                    this.isPathActive("/dashboard")
+                      ? "nav-item active"
+                      : "nav-item"
                   }
                 >
                   <Link to="/dasboard/rate-of-production" className="nav-link">
@@ -64,12 +64,12 @@ export class Header extends Component {
                   </Link>
                 </li>
 
-                {user && user.authorities[0] === 'ADMIN' && (
+                {user && user.authorities[0] === "ADMIN" && (
                   <li
                     className={
-                      this.isPathActive('/machines')
-                        ? 'nav-item active'
-                        : 'nav-item'
+                      this.isPathActive("/machines")
+                        ? "nav-item active"
+                        : "nav-item"
                     }
                   >
                     <Link to="/machines/view-all-machines" className="nav-link">
@@ -78,12 +78,12 @@ export class Header extends Component {
                   </li>
                 )}
 
-                {user && user.authorities[0] === 'ADMIN' && (
+                {user && user.authorities[0] === "ADMIN" && (
                   <li
                     className={
-                      this.isPathActive('/alarms')
-                        ? 'nav-item active'
-                        : 'nav-item'
+                      this.isPathActive("/alarms")
+                        ? "nav-item active"
+                        : "nav-item"
                     }
                   >
                     <Link to="/alarms/all-alarms" className="nav-link">
@@ -92,12 +92,12 @@ export class Header extends Component {
                   </li>
                 )}
 
-                {user && user.authorities[0] === 'ADMIN' && (
+                {user && user.authorities[0] === "ADMIN" && (
                   <li
                     className={
-                      this.isPathActive('/usermanagement')
-                        ? 'nav-item active'
-                        : 'nav-item'
+                      this.isPathActive("/usermanagement")
+                        ? "nav-item active"
+                        : "nav-item"
                     }
                   >
                     <Link
@@ -108,20 +108,6 @@ export class Header extends Component {
                     </Link>
                   </li>
                 )}
-
-                {/* {user && user.authorities[0] === "ADMIN" && (
-                  <li
-                    className={
-                      this.isPathActive("/notifications")
-                        ? "nav-item active"
-                        : "nav-item"
-                    }
-                  >
-                    <Link to="/notifications" className="nav-link">
-                      Notifications
-                    </Link>
-                  </li>
-                )} */}
               </ul>
             </div>
             <div className="az-header-right">
@@ -130,39 +116,14 @@ export class Header extends Component {
               </Link>
 
               <Dropdown className="az-profile-menu">
-                <Dropdown.Toggle as={'a'} className="az-img-user">
-                  <img
-                    src={require('../../assets/images/img1.jpg')}
-                    alt=""
-                  ></img>
+                <Dropdown.Toggle as={"a"} className="az-img-user">
+                  <i class="fas fa-user-alt" style={{ fontSize: "28px" }}></i>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  {/* <div className="az-dropdown-header d-sm-none">
-                    <a
-                      href="#/"
-                      onClick={(event) => this.closeMenu(event)}
-                      className="az-header-arrow"
-                    >
-                      <i className="icon ion-md-arrow-back"></i>
-                    </a>
-                  </div>
-                  <div className="az-header-profile">
-                    <div className="az-img-user">
-                      <img
-                        src={require("../../assets/images/img1.jpg")}
-                        alt=""
-                      ></img>
-                    </div>
-                    <h6>Aziana Pechon</h6>
-                    <span>Position</span>
-                  </div> */}
-
                   <Link to="/profile/user-profile" className="dropdown-item">
                     <i className="typcn typcn-user-outline"></i> My Profile
                   </Link>
-                  {/* <Link to="/profile/user-profile" className="dropdown-item">
-                    <i className="typcn typcn-edit"></i> Edit Profile
-                  </Link> */}
+
                   <Link to="/logout" className="dropdown-item">
                     <i className="typcn typcn-power-outline"></i> Sign Out
                   </Link>
@@ -172,12 +133,12 @@ export class Header extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   isPathActive(path) {
-    return this.props.location.pathname.startsWith(path)
+    return this.props.location.pathname.startsWith(path);
   }
 }
 
-export default withRouter(Header)
+export default withRouter(Header);

@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import Joi from "joi";
 import Form from "./common/form";
 import ProductionLineService from "../../services/admin/productionLineService";
@@ -8,14 +7,12 @@ import { toast } from "react-toastify";
 export class AddProductionline extends Form {
   state = {
     data: {
-      //every input field name == state name
       production_line_name: "",
       slug: "",
     },
     errors: {},
   };
 
-  //error handling
   schema = Joi.object({
     production_line_name: Joi.string().required(),
     slug: Joi.string().required(),
@@ -46,7 +43,6 @@ export class AddProductionline extends Form {
       if (response.status === 200) {
         if (response.data.code === 200) {
           const data = {
-            // every input field, input name == state name
             production_line_name: "",
             slug: "",
           };
@@ -112,7 +108,6 @@ export class AddProductionline extends Form {
                   null,
                   null
                 )}
-                {/* <button>Add Machine</button>    */}
               </form>
             </div>
           </div>

@@ -9,23 +9,20 @@ import { toast } from "react-toastify";
 export class Signin extends Form {
   state = {
     data: {
-      // every input field, input name == state name
       username: "",
       password: "",
     },
-    errors: {}, // is A must
+    errors: {},
     forceChange: false,
   };
 
-  // error handlling
   schema = Joi.object({
-    username: Joi.string() // string
-      .required() // required
-      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }), // email
-    password: Joi.string().required(), // string, required
+    username: Joi.string()
+      .required()
+      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
+    password: Joi.string().required(),
   });
 
-  // must impliment this
   doSubmit = async () => {
     const { username, password } = this.state.data;
     try {
@@ -38,7 +35,7 @@ export class Signin extends Form {
       if (response_data.status === 200) {
         if (response_data.data.code === 200) {
           Auth.setForcePassword(response_data.data.status);
-          console.log("status", response_data.data.status);
+
           if (response_data.data.status === "FORCE_PASSWORD_CHANGE_PENDING") {
             this.setState({ forceChange: true });
             window.location = "/force-change-password";
@@ -49,7 +46,6 @@ export class Signin extends Form {
       }
       toast.error("OOPS ! Something went wrong !");
     } catch (ex) {
-      console.log("in catch");
       if (ex.response) {
         const errors = { ...this.state.errors };
         errors.username = ex.response.data.error_description;
@@ -90,7 +86,7 @@ export class Signin extends Form {
                 <div className="form-group">
                   {this.renderInput(
                     "password",
-                    "Paasword",
+                    "Password",
                     "Enter your password",
                     null,
                     null,

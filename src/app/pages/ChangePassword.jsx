@@ -11,17 +11,15 @@ export class ChangePassword extends Form {
       old_password: "",
       confirm_password: "",
     },
-    errors: {}, // is A must
+    errors: {},
   };
 
-  // error handlling
   schema = Joi.object({
-    new_password: Joi.string().required(), // string, required
+    new_password: Joi.string().required(),
     old_password: Joi.string().required(),
     confirm_password: Joi.string().required(),
   });
 
-  // must impliment this
   doSubmit = async () => {
     const { password } = this.state.data;
     try {
