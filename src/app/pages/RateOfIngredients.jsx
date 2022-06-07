@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import Chart from "../charts/Chart";
-import Select from "../components/common/select";
-import RateService from "../../services/admin/rateService";
-import MachineService from "../../services/admin/machineService";
-import { toast } from "react-toastify";
+import React, { Component } from 'react'
+import Chart from '../charts/Chart'
+import Select from '../components/common/select'
+import RateService from '../../services/admin/rateService'
+import MachineService from '../../services/admin/machineService'
+import { toast } from 'react-toastify'
 
 export default class RateOfIngredients extends Component {
   state = {
     machines: [],
 
     data: {
-      machine_id: "",
+      machine_id: '',
       is_temp: 0,
     },
 
@@ -21,95 +21,101 @@ export default class RateOfIngredients extends Component {
           data: [],
           borderWidth: 2,
           fill: false,
-          backgroundColor: ["rgba(0, 204, 212, .2)"],
-          borderColor: ["rgb(0, 204, 212)"],
+          backgroundColor: ['rgba(0, 204, 212, .2)'],
+          borderColor: ['rgb(0, 204, 212)'],
         },
       ],
     },
-  };
+  }
 
   componentDidMount = async () => {
     try {
-      const response = await MachineService.getAllMachinesByType("INGRE");
-      console.log("All INGRE machines response data", response);
+      const response = await MachineService.getAllMachinesByType('INGRE')
+
       if (response.status === 200) {
         if (response.data.code === 200) {
-          this.setState({ machines: response.data.data });
+          this.setState({ machines: response.data.data })
         } else {
-          toast.error(response.data.data);
+          toast.error(response.data.data)
         }
       }
 
-      let inerval;
-      clearInterval(inerval);
+      let inerval
+      clearInterval(inerval)
 
       inerval = setInterval(async () => {
         if (this.state.data.machine_id) {
-          var data_send = { ...this.state.data };
+          var data_send = { ...this.state.data }
 
-          data_send.rate = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
+          data_send.rate = Math.floor(Math.random() * (100 - 1 + 1)) + 1
 
-          console.log("I AM HERE.......", data_send);
-
-          const new_response = await MachineService.addRates(data_send);
+          const new_response = await MachineService.addRates(data_send)
           if (new_response.status === 200) {
             if (new_response.data.code === 200) {
             } else {
-              clearInterval(inerval);
-              toast.error(new_response.data.data);
+              clearInterval(inerval)
+              toast.error(new_response.data.data)
             }
           } else {
-            clearInterval(inerval);
-            toast.error(new_response.data.data);
+            clearInterval(inerval)
+            toast.error(new_response.data.data)
           }
 
-          const res_1 = await RateService.getRates(data_send);
+          const res_1 = await RateService.getRates(data_send)
           if (res_1.status === 200) {
             if (res_1.data.code === 200) {
-              const dataPoints = { ...this.state.dataPoints };
-              dataPoints.labels = res_1.data.data.labels;
-              dataPoints.datasets[0].data = res_1.data.data.data;
+              const dataPoints = { ...this.state.dataPoints }
+              dataPoints.labels = res_1.data.data.labels
+              dataPoints.datasets[0].data = res_1.data.data.data
 
-              console.log("Hay Data Set ", dataPoints);
-              this.setState({ dataPoints });
+              if (this.state.data.machine_id) this.setState({ dataPoints })
             } else {
-              clearInterval(inerval);
+              clearInterval(inerval)
 
-              toast.error(res_1.data.data);
+              toast.error(res_1.data.data)
             }
           } else {
-            toast.error("Error Occured!");
-            clearInterval(inerval);
+            toast.error('Error Occured!')
+            clearInterval(inerval)
           }
         }
-      }, 5000);
+      }, 5000)
     } catch (error) {
-      toast.error("Error Occured!");
+      toast.error('Error Occured!')
     }
-  };
+  }
 
   handleChangeSelect = async (event, name) => {
-    const data = { ...this.state.data };
-    data[name] = event.target.value;
+    const data = { ...this.state.data }
+    data[name] = event.target.value
     try {
-      const response = await RateService.getRates(data);
-      console.log("machine rates data", response);
-      if (response.status === 200) {
-        if (response.data.code === 200) {
-          const dataPoints = { ...this.state.dataPoints };
-          dataPoints.labels = response.data.data.labels;
-          dataPoints.datasets[0].data = response.data.data.data;
-          this.setState({ dataPoints });
-        } else {
-          toast.error(response.data.data);
+      if (event.target.value) {
+        const response = await RateService.getRates(data)
+
+        if (response.status === 200) {
+          if (response.data.code === 200) {
+            const dataPoints = { ...this.state.dataPoints }
+            dataPoints.labels = response.data.data.labels
+            dataPoints.datasets[0].data = response.data.data.data
+
+            this.setState({ dataPoints, data })
+          } else {
+            toast.error(response.data.data)
+          }
         }
+      } else {
+        const dataPoints = { ...this.state.dataPoints }
+        dataPoints.labels = []
+        dataPoints.datasets[0].data = []
+
+        const data = { ...this.state.data }
+        data.machine_id = ''
+        this.setState({ dataPoints, data })
       }
     } catch (error) {
-      toast.error("Error Occured!");
+      toast.error('Error Occured!')
     }
-    this.setState({ data });
-    console.log(this.state.data);
-  };
+  }
 
   render() {
     return (
@@ -138,6 +144,6 @@ export default class RateOfIngredients extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }

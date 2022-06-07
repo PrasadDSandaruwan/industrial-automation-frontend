@@ -1,64 +1,83 @@
-import React, { Component } from "react";
-import MachineService from "../../services/admin/machineService";
-import MachineDemo from "../components/common/machineDemo";
-import AlarmDemo from "../components/common/alarmDemo";
-import { toast } from "react-toastify";
-import AddRates from "./../../services/FakeService/addRatesFakeService";
+import React, { Component } from 'react'
+import MachineService from '../../services/admin/machineService'
+import MachineDemo from '../components/common/machineDemo'
+import AlarmDemo from '../components/common/alarmDemo'
+import { toast } from 'react-toastify'
 
 class DemoPage extends Component {
   state = {
     isRedirect: false,
     data: [],
-    fakeServiceData: [],
-  };
+    id_list: [],
+  }
 
   componentDidMount = async () => {
     try {
-      const fakeServiceData = AddRates.getRates();
-
-      this.setState({ fakeServiceData });
-
-      const response = await MachineService.getDemoDetails();
+      const response = await MachineService.getDemoDetails()
 
       if (response.status === 200) {
         if (response.data.code === 200) {
-          const data = response.data.data;
-          this.setState({ data });
+          const data = response.data.data
+          this.setState({ data })
         } else {
-          this.setState({ isRedirect: true });
-          toast.error("Error Occured!");
+          this.setState({ isRedirect: true })
+          toast.error('Error Occured!')
         }
       } else {
-        this.setState({ isRedirect: true });
-        toast.error("Error Occured!");
+        this.setState({ isRedirect: true })
+        toast.error('Error Occured!')
+      }
+
+      const response_id = await MachineService.getIdList()
+
+      if (response_id.status === 200) {
+        if (response_id.data.code === 200) {
+          const id_list = response_id.data.data
+          this.setState({ id_list })
+        } else {
+          this.setState({ isRedirect: true })
+          toast.error('Error Occured!')
+        }
+      } else {
+        this.setState({ isRedirect: true })
+        toast.error('Error Occured!')
       }
     } catch (error) {
-      toast.error("Error occured!");
+      toast.error('Error occured!')
     }
 
     var inerval = setInterval(async () => {
-      const fake_data = this.state.fakeServiceData;
-      if (fake_data.length <= 1) clearInterval(inerval);
+      const id_list = this.state.id_list
 
-      const data_send = fake_data.shift();
+      if (id_list.length == 0) clearInterval(inerval)
 
-      this.setState({ fakeServiceData: fake_data });
+      var data_send = {
+        machine_id: 1,
+        is_temp: 0,
+        rate: 20,
+      }
+
+      data_send.is_temp = Math.floor(Math.random() * 2)
+      data_send.machine_id = id_list[Math.floor(Math.random() * id_list.length)]
+
+      data_send.rate = Math.floor(Math.random() * 80) + 1
+
       try {
-        const new_response = await MachineService.addRates(data_send);
+        const new_response = await MachineService.addRates(data_send)
         if (new_response.status === 200) {
           if (new_response.data.code === 200) {
-            const data_alarm = new_response.data.data.data.alarms;
-            const data_machine = new_response.data.data.data.machines;
+            const data_alarm = new_response.data.data.data.alarms
+            const data_machine = new_response.data.data.data.machines
 
-            const new_state = this.state.data;
+            const new_state = this.state.data
 
             for (let i = 0; i < data_alarm.length; i++) {
               for (let j = 0; j < new_state.length; j++) {
                 for (let k = 0; k < new_state[j].length; k++) {
                   if (Object.keys(new_state[j][k].alarm).length !== 0) {
                     if (new_state[j][k].alarm.id === data_alarm[i].id) {
-                      new_state[j][k].alarm.massage = data_alarm[i].massage;
-                      new_state[j][k].alarm.type = data_alarm[i].type;
+                      new_state[j][k].alarm.massage = data_alarm[i].massage
+                      new_state[j][k].alarm.type = data_alarm[i].type
                     }
                   }
                 }
@@ -70,36 +89,36 @@ class DemoPage extends Component {
                 for (let k = 0; k < new_state[j].length; k++) {
                   if (Object.keys(new_state[j][k].machine).length !== 0) {
                     if (new_state[j][k].machine.id === data_machine[i].id) {
-                      new_state[j][k].machine.massage = data_machine[i].massage;
-                      new_state[j][k].machine.command = data_machine[i].command;
+                      new_state[j][k].machine.massage = data_machine[i].massage
+                      new_state[j][k].machine.command = data_machine[i].command
                       new_state[j][k].machine.command_type =
-                        data_machine[i].command_type;
-                      new_state[j][k].machine.rate = data_machine[i].rate;
-                      new_state[j][k].machine.temp = data_machine[i].temp;
+                        data_machine[i].command_type
+                      new_state[j][k].machine.rate = data_machine[i].rate
+                      new_state[j][k].machine.temp = data_machine[i].temp
                     }
                   }
                 }
               }
             }
 
-            this.setState({ data: new_state });
+            this.setState({ data: new_state })
           } else {
-            toast.error("Error Occured!");
-            clearInterval(inerval);
+            toast.error('Error Occured!')
+            clearInterval(inerval)
           }
         } else {
-          toast.error("Error Occured!");
-          clearInterval(inerval);
+          toast.error('Error Occured!')
+          clearInterval(inerval)
         }
       } catch (error) {
-        toast.error("Error Occured!");
-        clearInterval(inerval);
+        toast.error('Error Occured!')
+        clearInterval(inerval)
       }
-    }, 5000);
-  };
+    }, 5000)
+  }
 
   render() {
-    const style_class = "col-3 m-1 d-flex";
+    const style_class = 'col-3 m-1 d-flex'
 
     return (
       <React.Fragment>
@@ -108,20 +127,20 @@ class DemoPage extends Component {
             <div>
               <div
                 className="row d-flex justify-content-center"
-                style={{ marginTop: "10px", marginBottom: "10px" }}
+                style={{ marginTop: '10px', marginBottom: '10px' }}
               >
                 <h1>Production Line</h1>
               </div>
               <div className="row d-flex justify-content-center">
                 {lines.map((line) => (
                   <React.Fragment>
-                    {line.machine && line.machine.command_type === "WARNING" && (
+                    {line.machine && line.machine.command_type === 'WARNING' && (
                       <div
                         className={style_class}
                         style={{
-                          borderWidth: "5px",
-                          border: "solid",
-                          borderColor: "yellow",
+                          borderWidth: '5px',
+                          border: 'solid',
+                          borderColor: 'yellow',
                         }}
                       >
                         <div>
@@ -141,14 +160,14 @@ class DemoPage extends Component {
                     )}
 
                     {line.machine &&
-                      line.machine.command_type !== "WARNING" &&
-                      line.machine.command_type !== "STOP" &&
-                      line.machine.command_type !== "SUCCESS" && (
+                      line.machine.command_type !== 'WARNING' &&
+                      line.machine.command_type !== 'STOP' &&
+                      line.machine.command_type !== 'SUCCESS' && (
                         <div
                           className={style_class}
                           style={{
-                            border: "solid 0.5px",
-                            borderColor: "black",
+                            border: 'solid 0.5px',
+                            borderColor: 'black',
                           }}
                         >
                           <div>
@@ -168,13 +187,13 @@ class DemoPage extends Component {
                         </div>
                       )}
 
-                    {line.machine && line.machine.command_type === "STOP" && (
+                    {line.machine && line.machine.command_type === 'STOP' && (
                       <div
                         className={style_class}
                         style={{
-                          borderWidth: "5px",
-                          border: "solid",
-                          borderColor: "red",
+                          borderWidth: '5px',
+                          border: 'solid',
+                          borderColor: 'red',
                         }}
                       >
                         <div>
@@ -193,13 +212,13 @@ class DemoPage extends Component {
                       </div>
                     )}
 
-                    {line.machine && line.machine.command_type === "SUCCESS" && (
+                    {line.machine && line.machine.command_type === 'SUCCESS' && (
                       <div
                         className={style_class}
                         style={{
-                          borderWidth: "5px",
-                          border: "solid",
-                          borderColor: "green",
+                          borderWidth: '5px',
+                          border: 'solid',
+                          borderColor: 'green',
                         }}
                       >
                         <div>
@@ -223,7 +242,7 @@ class DemoPage extends Component {
             </div>
           ))}
       </React.Fragment>
-    );
+    )
   }
 }
-export default DemoPage;
+export default DemoPage
