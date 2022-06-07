@@ -1,17 +1,13 @@
-import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
-import Joi from 'joi'
-import Form from './common/form'
-import Input from './common/input'
-import MachineService from '../../services/admin/machineService'
-import Select from './common/select'
-import Button from './common/button'
-import { toast } from 'react-toastify'
+import React, { Component } from "react";
+import Joi from "joi";
+import Input from "./common/input";
+import MachineService from "../../services/admin/machineService";
+import Select from "./common/select";
+import { toast } from "react-toastify";
 
 export class EditInitialRates extends Component {
   state = {
     data: {
-      //every input field name == state name
       machine_id: 0,
       connected_machine_id: 0,
       rate: 0,
@@ -22,92 +18,89 @@ export class EditInitialRates extends Component {
     connectedMachines: [],
 
     errors: {},
-  }
+  };
 
-  //error handling
   schema = Joi.object({
     machine_id: Joi.number().required(),
     connected_machine_id: Joi.number().required(),
     rate: Joi.string().required(),
-  })
+  });
 
   componentDidMount = async () => {
     try {
-      const responseGetMachineIDs = await MachineService.getAllMachines()
+      const responseGetMachineIDs = await MachineService.getAllMachines();
 
       if (responseGetMachineIDs.status === 200) {
         if (responseGetMachineIDs.data.code === 200) {
-          const response_data = responseGetMachineIDs.data.data
-          this.setState({ machines: response_data })
+          const response_data = responseGetMachineIDs.data.data;
+          this.setState({ machines: response_data });
         } else {
-          toast.error(responseGetMachineIDs.data.message)
+          toast.error(responseGetMachineIDs.data.message);
         }
       } else {
-        toast.error(responseGetMachineIDs.data.message)
+        toast.error(responseGetMachineIDs.data.message);
       }
     } catch (error) {
-      toast.error('Error Occured!')
+      toast.error("Error Occured!");
     }
-  }
+  };
 
   handleMachineId = async (event, name) => {
-    const data = { ...this.state.data }
-    data[name] = event.target.value
+    const data = { ...this.state.data };
+    data[name] = event.target.value;
     try {
       const response = await MachineService.getPossibleConnectionIDs(
-        event.target.value,
-      )
+        event.target.value
+      );
 
       if (response.status === 200) {
         if (response.data.code === 200) {
-          this.setState({ data, connectedMachines: response.data.data.data })
+          this.setState({ data, connectedMachines: response.data.data.data });
         } else {
-          toast.error(response.data.message)
+          toast.error(response.data.message);
         }
       } else {
-        toast.error(response.data.message)
+        toast.error(response.data.message);
       }
     } catch {
-      toast.error('Error Occured!')
+      toast.error("Error Occured!");
     }
-  }
+  };
 
   handleConnectedMachineId = async (event, name) => {
-    const data = { ...this.state.data }
-    data[name] = event.target.value
+    const data = { ...this.state.data };
+    data[name] = event.target.value;
 
     try {
-      const response = await MachineService.getRates(data)
+      const response = await MachineService.getRates(data);
 
       if (response.status === 200) {
         if (response.data.code === 200) {
-          data.temp = response.data.data.temp
-          data.rate = response.data.data.rate
-          this.setState({ data })
+          data.temp = response.data.data.temp;
+          data.rate = response.data.data.rate;
+          this.setState({ data });
         } else {
-          toast.error(response.data.message)
+          toast.error(response.data.message);
         }
       } else {
-        toast.error(response.data.message)
+        toast.error(response.data.message);
       }
     } catch {
-      toast.error('Error Occured!')
+      toast.error("Error Occured!");
     }
-  }
+  };
 
   handleChange = ({ currentTarget: input }) => {
-    console.log(input)
+    const data = { ...this.state.data };
+    data[input.name] = input.value;
 
-    const data = { ...this.state.data }
-    data[input.name] = input.value
-
-    this.setState({ data })
-  }
+    this.setState({ data });
+  };
   doSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     try {
-      const response = await MachineService.addInitialRates(this.state.data)
+      const response = await MachineService.addInitialRates(this.state.data);
 
       if (response.status === 200) {
         if (response.data.code === 200) {
@@ -115,30 +108,30 @@ export class EditInitialRates extends Component {
             // every input field, input name == state name
             machine_id: 0,
             connected_machine_id: 0,
-            rate: '',
-          }
-          this.setState({ data })
+            rate: "",
+          };
+          this.setState({ data });
 
-          toast.success(response.data.message)
+          toast.success(response.data.message);
         } else {
-          toast.error(response.data.message)
+          toast.error(response.data.message);
         }
       } else {
-        toast.error(response.data.message)
+        toast.error(response.data.message);
       }
     } catch (error) {
-      toast.error('Error Occured!')
+      toast.error("Error Occured!");
     }
-  }
+  };
 
   render() {
     return (
       <div>
         <div>
-          <div className="az-signin-wrapper " style={{ minHeight: '500px' }}>
+          <div className="az-signin-wrapper " style={{ minHeight: "500px" }}>
             <div
               className="az-card-signin"
-              style={{ justifyItems: 'normal', height: 'auto', width: '600px' }}
+              style={{ justifyItems: "normal", height: "auto", width: "600px" }}
             >
               <h4>Add Machine Rates</h4>
 
@@ -185,8 +178,8 @@ export class EditInitialRates extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default EditInitialRates
+export default EditInitialRates;

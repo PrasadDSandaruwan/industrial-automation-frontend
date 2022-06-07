@@ -4,7 +4,6 @@ import Form from "./form";
 export class AlarmDemo extends Form {
   state = {
     data: {
-      //every input field name == state name
       alarm_name: "",
       id: 1,
       massage: "",
@@ -14,7 +13,6 @@ export class AlarmDemo extends Form {
   };
 
   componentDidMount = () => {
-    // const data = {...this.state.data};
     const data = this.props;
     this.setState({ data });
   };

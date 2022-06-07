@@ -12,26 +12,22 @@ export class ForcePasswordChange extends Form {
       new_password: "",
       confirm_password: "",
     },
-    errors: {}, // is A must
+    errors: {},
     isRedirect: false,
   };
 
-  // error handlling
   schema = Joi.object({
-    new_password: Joi.string().required(), // string, required
+    new_password: Joi.string().required(),
     confirm_password: Joi.string().required(),
   });
 
-  // must impliment this
   doSubmit = async () => {
-    // const { password } = this.state.data;
     console.log("inside do submit");
     try {
       const response = await UserService.forceChangePassword(this.state.data);
       console.log("response", response);
       if (response.status === 200) {
         if (response.data.code === 200) {
-          // this.setState({isRedirect:true})
           toast.success(response.data.message);
           Auth.setForcePassword("VERIFIED_USER");
           window.location = "/dasboard";

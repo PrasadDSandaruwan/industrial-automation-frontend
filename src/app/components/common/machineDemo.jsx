@@ -4,7 +4,6 @@ import Form from "./form";
 export class MachineDemo extends Form {
   state = {
     data: {
-      //every input field name == state name
       name: "",
       id: 1,
       init_rate: 1,
@@ -19,7 +18,6 @@ export class MachineDemo extends Form {
   };
 
   componentDidMount = () => {
-    // const data = {...this.state.data};
     const data = this.props;
     this.setState({ data });
   };

@@ -1,22 +1,20 @@
-import React, { Component, Suspense, lazy } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import ProtectedRoute from './components/common/protectedRoute'
-import ProtectedRouteAdmin from './components/common/protectedRouteAdmin'
-import ProtectedRouteForcePassword from './components/common/protectedRouteForcePassword'
-import AddProductionline from './components/AddProductionline'
-import ForcePasswordChange from './components/forcePasswordChange'
-import ProtectedRouteLogoutUser from './components/common/protectedRouteLogoutUser'
-const Dashboard = lazy(() => import('./dashboard/Dashboard'))
-const Machines = lazy(() => import('./pages/Machines'))
-const Alarms = lazy(() => import('./pages/Alarms'))
-const Notifications = lazy(() => import('./pages/Notifications'))
-const UserManagement = lazy(() => import('./pages/UserManagement'))
-const Profile = lazy(() => import('./pages/Profile'))
-const Signin = lazy(() => import('./pages/Signin'))
-const ChangePassword = lazy(() => import('./pages/ChangePassword'))
-const Logout = lazy(() => import('../app/components/common/logout'))
-const AddMachine = lazy(() => import('../app/components/AddMachine'))
-const DemoPage = lazy(() => import('../app/pages/DemoPage'))
+import React, { Component, Suspense, lazy } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import ProtectedRoute from "./components/common/protectedRoute";
+import ProtectedRouteAdmin from "./components/common/protectedRouteAdmin";
+import ProtectedRouteForcePassword from "./components/common/protectedRouteForcePassword";
+import AddProductionline from "./components/AddProductionline";
+import ForcePasswordChange from "./components/forcePasswordChange";
+import ProtectedRouteLogoutUser from "./components/common/protectedRouteLogoutUser";
+const Dashboard = lazy(() => import("./dashboard/Dashboard"));
+const Machines = lazy(() => import("./pages/Machines"));
+const Alarms = lazy(() => import("./pages/Alarms"));
+const UserManagement = lazy(() => import("./pages/UserManagement"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Signin = lazy(() => import("./pages/Signin"));
+const Logout = lazy(() => import("../app/components/common/logout"));
+const AddMachine = lazy(() => import("../app/components/AddMachine"));
+const DemoPage = lazy(() => import("../app/pages/DemoPage"));
 
 export class AppRoutes extends Component {
   render() {
@@ -40,16 +38,8 @@ export class AppRoutes extends Component {
             component={ForcePasswordChange}
           />
           <ProtectedRoute path="/dasboard" component={Dashboard} />
-          {/* <Route path="/dasboard">
-            <Redirect to="/dasboard/rate-of-production"></Redirect>
-          </Route> */}
 
           <ProtectedRouteLogoutUser path="/logout" component={Logout} />
-
-          <ProtectedRouteAdmin
-            path="/notifications"
-            component={Notifications}
-          />
 
           <Route path="/demo" component={DemoPage}></Route>
 
@@ -58,8 +48,8 @@ export class AppRoutes extends Component {
           </Route>
         </Switch>
       </Suspense>
-    )
+    );
   }
 }
 
-export default AppRoutes
+export default AppRoutes;

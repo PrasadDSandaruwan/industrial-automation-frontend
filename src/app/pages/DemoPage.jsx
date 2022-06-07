@@ -22,8 +22,6 @@ class DemoPage extends Component {
 
       if (response.status === 200) {
         if (response.data.code === 200) {
-          // const data = [...this.data]
-          console.log("Start", response.data.data);
           const data = response.data.data;
           this.setState({ data });
         } else {
@@ -35,8 +33,7 @@ class DemoPage extends Component {
         toast.error("Error Occured!");
       }
     } catch (error) {
-      alert("Error occured!");
-      console.log("Error inside catch", error);
+      toast.error("Error occured!");
     }
 
     var inerval = setInterval(async () => {
@@ -46,49 +43,62 @@ class DemoPage extends Component {
       const data_send = fake_data.shift();
 
       this.setState({ fakeServiceData: fake_data });
-      const new_response = await MachineService.addRates(data_send);
+      try {
+        const new_response = await MachineService.addRates(data_send);
+        if (new_response.status === 200) {
+          if (new_response.data.code === 200) {
+            const data_alarm = new_response.data.data.data.alarms;
+            const data_machine = new_response.data.data.data.machines;
 
-      const data_alarm = new_response.data.data.data.alarms;
-      const data_machine = new_response.data.data.data.machines;
+            const new_state = this.state.data;
 
-      const new_state = this.state.data;
-
-      for (let i = 0; i < data_alarm.length; i++) {
-        for (let j = 0; j < new_state.length; j++) {
-          for (let k = 0; k < new_state[j].length; k++) {
-            if (Object.keys(new_state[j][k].alarm).length !== 0) {
-              if (new_state[j][k].alarm.id === data_alarm[i].id) {
-                new_state[j][k].alarm.massage = data_alarm[i].massage;
-                new_state[j][k].alarm.type = data_alarm[i].type;
+            for (let i = 0; i < data_alarm.length; i++) {
+              for (let j = 0; j < new_state.length; j++) {
+                for (let k = 0; k < new_state[j].length; k++) {
+                  if (Object.keys(new_state[j][k].alarm).length !== 0) {
+                    if (new_state[j][k].alarm.id === data_alarm[i].id) {
+                      new_state[j][k].alarm.massage = data_alarm[i].massage;
+                      new_state[j][k].alarm.type = data_alarm[i].type;
+                    }
+                  }
+                }
               }
             }
-          }
-        }
-      }
 
-      for (let i = 0; i < data_machine.length; i++) {
-        for (let j = 0; j < new_state.length; j++) {
-          for (let k = 0; k < new_state[j].length; k++) {
-            if (Object.keys(new_state[j][k].machine).length !== 0) {
-              if (new_state[j][k].machine.id === data_machine[i].id) {
-                new_state[j][k].machine.massage = data_machine[i].massage;
-                new_state[j][k].machine.command = data_machine[i].command;
-                new_state[j][k].machine.command_type =
-                  data_machine[i].command_type;
-                new_state[j][k].machine.rate = data_machine[i].rate;
-                new_state[j][k].machine.temp = data_machine[i].temp;
+            for (let i = 0; i < data_machine.length; i++) {
+              for (let j = 0; j < new_state.length; j++) {
+                for (let k = 0; k < new_state[j].length; k++) {
+                  if (Object.keys(new_state[j][k].machine).length !== 0) {
+                    if (new_state[j][k].machine.id === data_machine[i].id) {
+                      new_state[j][k].machine.massage = data_machine[i].massage;
+                      new_state[j][k].machine.command = data_machine[i].command;
+                      new_state[j][k].machine.command_type =
+                        data_machine[i].command_type;
+                      new_state[j][k].machine.rate = data_machine[i].rate;
+                      new_state[j][k].machine.temp = data_machine[i].temp;
+                    }
+                  }
+                }
               }
             }
-          }
-        }
-      }
 
-      this.setState({ data: new_state });
+            this.setState({ data: new_state });
+          } else {
+            toast.error("Error Occured!");
+            clearInterval(inerval);
+          }
+        } else {
+          toast.error("Error Occured!");
+          clearInterval(inerval);
+        }
+      } catch (error) {
+        toast.error("Error Occured!");
+        clearInterval(inerval);
+      }
     }, 5000);
   };
 
   render() {
-    console.log("RERENDERING .... ", this.state.data);
     const style_class = "col-3 m-1 d-flex";
 
     return (

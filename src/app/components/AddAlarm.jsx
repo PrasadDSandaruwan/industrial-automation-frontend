@@ -10,7 +10,6 @@ export class AddAlarm extends Form {
     nearestMachine: [],
 
     data: {
-      // every input field, input name == state name
       alarm_name: "",
       slug: "",
       nearest_machine_id: 1,
@@ -20,7 +19,7 @@ export class AddAlarm extends Form {
   };
 
   schema = Joi.object({
-    alarm_name: Joi.string().required(), // required
+    alarm_name: Joi.string().required(),
     slug: Joi.string().required(),
     nearest_machine_id: Joi.required(),
   });
@@ -64,7 +63,6 @@ export class AddAlarm extends Form {
       if (response.status === 200) {
         if (response.data.code === 200) {
           const data = {
-            // every input field, input name == state name
             alarm_name: "",
             slug: "",
             nearest_machine_id: 0,
@@ -73,7 +71,6 @@ export class AddAlarm extends Form {
 
           toast.success(response.data.message);
         } else {
-          //alert(response.data.message);
           toast.error(response.data.message);
         }
       }

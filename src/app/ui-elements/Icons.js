@@ -101,7 +101,6 @@ export class Icons extends Component {
                   <i className="far fa-file-alt"></i>
                 </div>
               </div>
-              {/* row */}
             </div>
 
             <p className="mg-t-15 mg-b-0">
@@ -162,7 +161,6 @@ export class Icons extends Component {
                   <i className="icon ion-md-pricetags"></i>
                 </div>
               </div>
-              {/* row */}
             </div>
             <div className="az-icon-group bg-gray-800 tx-white">
               <div className="row row-xs">
@@ -203,7 +201,6 @@ export class Icons extends Component {
                   <i className="icon ion-ios-home"></i>
                 </div>
               </div>
-              {/* row */}
             </div>
 
             <p className="mg-t-15 mg-b-0">
@@ -264,7 +261,6 @@ export class Icons extends Component {
                   <i className="la la-gift"></i>
                 </div>
               </div>
-              {/* row */}
             </div>
             <div className="az-icon-group bg-gray-800 tx-white">
               <div className="row row-xs">
@@ -305,7 +301,6 @@ export class Icons extends Component {
                   <i className="la la-tags"></i>
                 </div>
               </div>
-              {/* row */}
             </div>
 
             <p className="mg-t-15 mg-b-0">
@@ -366,7 +361,6 @@ export class Icons extends Component {
                   <i className="typcn typcn-coffee"></i>
                 </div>
               </div>
-              {/* row */}
             </div>
             <div className="az-icon-group bg-gray-800 tx-white">
               <div className="row row-xs">
@@ -407,7 +401,6 @@ export class Icons extends Component {
                   <i className="typcn typcn-shopping-cart"></i>
                 </div>
               </div>
-              {/* row */}
             </div>
             <p className="mg-t-15 mg-b-0">
               See more Typicons icons at{" "}
@@ -422,9 +415,7 @@ export class Icons extends Component {
 
             <div className="mg-lg-b-30"></div>
           </div>
-          {/* az-content-body */}
         </div>
-        {/* container */}
       </div>
     );
   }
